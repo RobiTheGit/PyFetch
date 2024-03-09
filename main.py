@@ -4,25 +4,14 @@ import os
 import psutil
 import colors
 print(colors.white)
-os_release = open('/etc/os-release', 'r')
-prettyname0 = os_release.readline()
-OTP_prettyname = prettyname0.split('=')
-PrettyName = ((OTP_prettyname[1]).replace('"', '')).replace('\n', '')
-os_release.close()
+OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
 
-uptime_file = open('/proc/uptime', 'r')
-uptime0 = uptime_file.readline()
-uptime = (uptime0.split(' '))[0]
-uptime_file.close()
-
-CPU_File = open('/proc/cpuinfo', 'r')
-CPU0 = CPU_File.readlines()
-CPU_Model_Name = ((((CPU0[4].split(':'))[1]).replace('\n', '')).split(' ', 1))[1]
-CPU_File.close()
+uptime = (open('/proc/uptime', 'r').readline().split(' '))[0]
+CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).replace('\n', '')).split(' ', 1))[1]
 
 mem = psutil.virtual_memory()
 print(os.getlogin() + '@' + os.uname().nodename, colors.white)
-print(colors.red, 'OS:', '\t', '\t', colors.white, PrettyName, os.uname().machine, colors.white)
+print(colors.red, 'OS:', '\t', '\t', colors.white, OS_Release, os.uname().machine, colors.white)
 print(colors.red, f'Shell:','\t', colors.white, str(os.environ.get("SHELL")).replace('/bin/',''), colors.white)
 print(colors.red, 'CPU:', '\t', '\t', colors.white, CPU_Model_Name, colors.white)
 print(colors.red, 'CPU Cores:', '\t', colors.white, os.cpu_count(), colors.white)
