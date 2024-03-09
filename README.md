@@ -5,8 +5,6 @@ TODO:
 
 GPU
 
-Shell
-
 Resolution
 
 Theme
