@@ -5,6 +5,4 @@ TODO:
 
 GPU
 
-Resolution
-
 Theme
