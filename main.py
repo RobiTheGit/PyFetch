@@ -6,7 +6,9 @@ import sys
 import os
 import psutil
 import colors
-
+gpu1 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[0]).split(' ', 1)[1]
+gpu2 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[1]).replace(']', '')
+GPU_Pretty = gpu1 + gpu2
 print(colors.white)
 OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
 uptime = (open('/proc/uptime', 'r').readline().split(' '))[0]
@@ -25,4 +27,6 @@ print(colors.red, f'Desktop:', '\t',  colors.white, os.environ.get("XDG_CURRENT_
 print(colors.red, f'Display Server:', colors.white, os.environ.get("XDG_SESSION_TYPE").title(), colors.white)
 print(colors.red, f'Cursor Theme:  ', colors.white, os.environ.get("XCURSOR_THEME"), colors.white)
 print(colors.red, f'Resolution:', '\t',colors.white,f'{Monitor_Width}x{Monitor_Height}' , colors.white)
+print(colors.red, f'GPU:'+ '\t'+ '\t',colors.white, GPU_Pretty, colors.white)
+
 print(colors.disptest)
