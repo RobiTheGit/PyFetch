@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Made for Debain based Linux
-# If you have a solution to use other distors, fix problems, etc, put a pull request or issue in
+# If you have a solution to use other distros, fix problems, etc, put a pull request or issue in
 # PyFetch - RobiTheGit (2024)
 import sys
 import os
@@ -30,5 +30,4 @@ print(colors.red, f'Display Server:', colors.white, os.environ.get("XDG_SESSION_
 print(colors.red, f'Cursor Theme:  ', colors.white, os.environ.get("XCURSOR_THEME"), colors.white)
 print(colors.red, f'Resolution:', '\t',colors.white,f'{Monitor_Width}x{Monitor_Height}' , colors.white)
 print(colors.red, f'GPU:'+ '\t'+ '\t',colors.white, GPU_Pretty, colors.white)
-
 print(colors.disptest)
