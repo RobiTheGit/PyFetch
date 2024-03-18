@@ -5,10 +5,18 @@
 import sys
 import os
 import psutil
-import colors
 '''
 Variable Setup
 '''
+white = f'\033[1;37m'
+cyan = f'\033[1;36m'
+magenta = f'\033[1;35m'
+blue = f'\033[1;34m'
+yellow = f'\033[1;33m'
+green = f'\033[1;32m'
+red = f'\033[1;31m'
+none = f'\033[1;00m'
+
 gpu1 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[0]).split(' ', 1)[1]
 gpu2 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[1]).replace(']', '')
 GPU_Pretty = gpu1 + gpu2
@@ -20,29 +28,29 @@ Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readli
 mem = psutil.virtual_memory()
 shellstr = str(os.environ.get("SHELL")).replace('/bin/','').title()
 modelstr = (open('/sys/devices/virtual/dmi/id/product_name','r').readline()).replace('\n','')
-User = f'{colors.red} {os.getlogin()}{colors.none}@{colors.red}{os.uname().nodename}{colors.none}'
+User = f'{red} {os.getlogin()}{none}@{red}{os.uname().nodename}{none}'
 vendorstr = (open('/sys/devices/virtual/dmi/id/sys_vendor','r').readline()).replace('\n','')
-RAMstr = f"{colors.none}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
+RAMstr = f"{none}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
 DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
 CurStr = os.environ.get("XCURSOR_THEME")
 
-OS = f'{colors.red} OS:\t\t{colors.none} {OS_Release} {os.uname().machine}'
-Shell =f'{colors.red} Shell:\t\t{colors.none} {shellstr}'
-Model = f'{colors.red} Model:\t\t{colors.none} {modelstr}'
-Vendor = f'{colors.red} Vendor:\t{colors.none} {vendorstr} '
-CPU = f'{colors.red} CPU: \t\t{colors.none} {CPU_Model_Name} {os.cpu_count()}'
-Kernel = f'{colors.red} Kernel: \t{colors.none} {os.uname().release}'
-RAM = f'{colors.red} Memory: \t {RAMstr} {colors.none}'
-Uptime = f'{colors.red} Uptime: \t{colors.none} {round(((float(uptime) / 60)),2)} Minutes'
-Desktop = f'{colors.red} Desktop: \t {colors.none}{Desktopstr}'
-DispServ = f"{colors.red} Display Server:{colors.none} {DispServStr}"
-CursorTheme = f"{colors.red} Cursor Theme:  {colors.none} {CurStr}"
-Resolution = f"{colors.red} Resolution: \t{colors.none} {Monitor_Width}x{Monitor_Height}"
-GPU = f"{colors.red} GPU:\t\t {colors.none}{GPU_Pretty}"
-ColoredBlocks = (f'\n{colors.disptest}\n{colors.disptest}\n')
+OS = f'{red} OS:\t\t{none} {OS_Release} {os.uname().machine}'
+Shell =f'{red} Shell:\t\t{none} {shellstr}'
+Model = f'{red} Model:\t\t{none} {modelstr}'
+Vendor = f'{red} Vendor:\t{none} {vendorstr} '
+CPU = f'{red} CPU: \t\t{none} {CPU_Model_Name} {os.cpu_count()}'
+Kernel = f'{red} Kernel: \t{none} {os.uname().release}'
+RAM = f'{red} Memory: \t {RAMstr} {none}'
+Uptime = f'{red} Uptime: \t{none} {round(((float(uptime) / 60)),2)} Minutes'
+Desktop = f'{red} Desktop: \t {none}{Desktopstr}'
+DispServ = f"{red} Display Server:{none} {DispServStr}"
+CursorTheme = f"{red} Cursor Theme:  {none} {CurStr}"
+Resolution = f"{red} Resolution: \t{none} {Monitor_Width}x{Monitor_Height}"
+GPU = f"{red} GPU:\t\t {none}{GPU_Pretty}"
+ColoredBlocks = ('\n\033[0;31;31m████\033[0;32;32m████\033[0;33;33m████\033[0;34;34m████\033[0;35;35m████\033[0;36;36m████\033[0;37;37m████\n\033[0;31;31m████\033[0;32;32m████\033[0;33;33m████\033[0;34;34m████\033[0;35;35m████\033[0;36;36m████\033[0;37;37m████\n')
 
-print(f"""{colors.none}
+print(f"""{none}
 {User}
 {OS}
 {Shell}
