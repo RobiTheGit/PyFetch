@@ -1,9 +1,0 @@
-white = f'\033[1;37m'
-cyan = f'\033[1;36m'
-magenta = f'\033[1;35m'
-blue = f'\033[1;34m'
-yellow = f'\033[1;33m'
-green = f'\033[1;32m'
-red = f'\033[1;31m'
-none = f'\033[1;00m'
-disptest =f"{red}████{green}████{yellow}████{blue}████{magenta}████{cyan}████{white}████"
