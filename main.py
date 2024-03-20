@@ -68,7 +68,7 @@ OS = f'{textcolor}OS:\t\t{none} {OS_Release} {os.uname().machine}'
 Shell =f'{textcolor}Shell:\t\t{none} {shellstr}'
 Model = f'{textcolor}Model:\t\t{none} {modelstr}'
 Vendor = f'{textcolor}Vendor:\t\t{none} {vendorstr} '
-CPU = f'{textcolor}CPU:{none} \t\t{none} {CPU_Model_Name} {os.cpu_count()}'
+CPU = f'{textcolor}CPU:{none} \t\t{none} {CPU_Model_Name}({os.cpu_count()})'
 Kernel = f'{textcolor}Kernel:{none} \t{none} {os.uname().release}'
 RAM = f'{textcolor}Memory:{none} \t {RAMstr} {none}'
 Uptime = f'{textcolor}Uptime:{none} \t{none} {round(((float(uptime) / 60)),2)} Minutes'
@@ -77,8 +77,8 @@ DispServ = f"{textcolor}Display Server:{none}  {DispServStr}"
 CursorTheme = f"{textcolor}Cursor Theme:{none}    {CurStr}"
 Resolution = f"{textcolor}Resolution:{none} \t {Res}"
 GPU = f"{textcolor}GPU:{none}\t\t {GPU_Pretty}"
-ColoredBlocks = (f'{black}███{red}███{green}███{yellow}███{blue}███{purple}███{cyan}███{bgrey}{none}')
-ColoredBlocks2 = (f'{grey}███{bred}███{bgreen}███{byellow}███{bblue}███{magenta}███{bcyan}███{white}{none}')
+ColoredBlocks = (f'{black}███{red}███{green}███{yellow}███{blue}███{purple}███{cyan}███{bgrey}███{none}')
+ColoredBlocks2 = (f'{grey}███{bred}███{bgreen}███{byellow}███{bblue}███{magenta}███{bcyan}███{white}███{none}')
 '''
 Print system information
 '''
@@ -96,24 +96,24 @@ l11 = f"{yellow}███████{grey}█{white}█████{grey}█{ye
 l12 = f"  {yellow}█████{grey}███████{yellow}█████{none}"
 print(f"""{none}
 
-{l1}\t\t{User}
-{l2}\t\t{none}----------------------------------
-{l3}\t\t{OS}
-{l4}\t\t{Shell}
-{l5}\t{Model}
-{l6}\t{Vendor}
-{l7}\t{CPU}
-{l8}\t{Kernel}
-{l9}\t{RAM}
-{l10}\t{Uptime}
-{l11}\t{Desktop}
-{l12}\t{DispServ}
-\t\t\t{CursorTheme}
-\t\t\t{Resolution}
-\t\t\t{GPU}
+{l1}\t\t\t{User}
+{l2}\t\t\t{none}----------------------------------
+{l3}\t\t\t{OS}
+{l4}\t\t\t{Shell}
+{l5}\t\t{Model}
+{l6}\t\t{Vendor}
+{l7}\t\t{CPU}
+{l8}\t\t{Kernel}
+{l9}\t\t{RAM}
+{l10}\t\t{Uptime}
+{l11}\t\t{Desktop}
+{l12}\t\t{DispServ}
+\t\t\t\t{CursorTheme}
+\t\t\t\t{Resolution}
+\t\t\t\t{GPU}
 
-\t\t\t{ColoredBlocks}
-\t\t\t{ColoredBlocks2}
+\t\t\t\t{ColoredBlocks}
+\t\t\t\t{ColoredBlocks2}
 
 """)
 
