@@ -37,12 +37,14 @@ redBG = f'\033[1;31;41m'
 blackBG = f'\033[1;30;40m'
 
 
-
-textcolor = red
+c1 = white
+c2 = grey
+c3 = yellow
+textcolor = c3
+HideNameAndSystem = False
 '''
 Get System Information
 '''
-os.system('clear')
 gpu1 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[0]).split(' ', 1)[1]
 gpu2 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[1]).replace(']', '')
 GPU_Pretty = gpu1 + gpu2
@@ -63,7 +65,10 @@ Res = f'{Monitor_Width}x{Monitor_Height}'
 '''
 Formatting all of the information into strings that can be used in the output
 '''
-User = f'{textcolor}{os.getlogin()}{none}@{textcolor}{os.uname().nodename}{none}'
+if HideNameAndSystem == False:
+    User = f'{textcolor}{os.getlogin()}{none}@{textcolor}{os.uname().nodename}{none}'
+else:
+    User = f'{textcolor}user{none}@{textcolor}linux{none}'
 OS = f'{textcolor}OS:\t\t{none} {OS_Release} {os.uname().machine}'
 Shell =f'{textcolor}Shell:\t\t{none} {shellstr}'
 Model = f'{textcolor}Model:\t\t{none} {modelstr}'
@@ -82,20 +87,19 @@ ColoredBlocks2 = (f'{grey}███{bred}███{bgreen}███{byellow}█�
 '''
 Print system information
 '''
-l1  = f"        {grey}█████{none}"
-l2  = f"       {grey}███████{none}"
-l3  = f"       {grey}██{white}█{grey}█{white}█{grey}██{none}"
-l4  = f"       {grey}█{yellow}█████{grey}█{none}"
-l5  = f"     {grey}██{white}██{yellow}███{white}██{grey}██{none}"
-l6  = f"    {grey}█{white}██████████{grey}██{none}"
-l7  = f"   {grey}█{white}████████████{grey}██{none}"
-l8  = f"   {grey}█{white}████████████{grey}███{none}"
-l9  = f"  {yellow}██{grey}█{white}███████████{grey}██{yellow}█{none}"
-l10 = f"{yellow}██████{grey}█{white}███████{grey}█{yellow}██████{none}"
-l11 = f"{yellow}███████{grey}█{white}█████{grey}█{yellow}███████{none}"
-l12 = f"  {yellow}█████{grey}███████{yellow}█████{none}"
+l1  = f"        {c2}█████{none}"
+l2  = f"       {c2}███████{none}"
+l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{none}"
+l4  = f"       {c2}█{c3}█████{c2}█{none}"
+l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{none}"
+l6  = f"    {c2}█{c1}██████████{c2}██{none}"
+l7  = f"   {c2}█{c1}████████████{c2}██{none}"
+l8  = f"   {c2}█{c1}████████████{c2}███{none}"
+l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{none}"
+l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{none}"
+l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{none}"
+l12 = f"  {c3}█████{c2}███████{c3}█████{none}"
 print(f"""{none}
-
 {l1}\t\t\t{User}
 {l2}\t\t\t{none}----------------------------------
 {l3}\t\t\t{OS}
