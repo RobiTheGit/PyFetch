@@ -51,8 +51,12 @@ GPU_Pretty = gpu1 + gpu2
 OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
 uptime = (open('/proc/uptime', 'r').readline().split(' '))[0]
 CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).replace('\n', '')).split(' ', 1))[1]
-Monitor_Width = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[18]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('width', ''))
-Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[19]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('height', ''))
+try:
+    Monitor_Width = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[18]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('width', ''))
+    Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[19]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('height', ''))
+except:
+    Monitor_Width = 'UNKNOWN'
+    Monitor_Height= 'UNKNOWN'
 mem = psutil.virtual_memory()
 shellstr = str(os.environ.get("SHELL")).replace('/bin/','').title()
 modelstr = (open('/sys/devices/virtual/dmi/id/product_name','r').readline()).replace('\n','')
