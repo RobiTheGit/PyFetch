@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # Made for Debain based Linux
 # If you have a solution to use other distros, fix problems, etc, put a pull request or issue in
-# PyFetch - RobiTheGit (2024)
+# PyFetch - RobiTheGit/RobiWanKenobi (2024)
 import sys
 import os
 import psutil
@@ -54,7 +54,7 @@ CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).r
 try:
     Monitor_Width = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[18]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('width', ''))
     Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[19]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('height', ''))
-except:
+except: #This was added since monitor resolution code didn't work on Gentoo'
     Monitor_Width = 'UNKNOWN'
     Monitor_Height= 'UNKNOWN'
 mem = psutil.virtual_memory()
@@ -63,6 +63,8 @@ modelstr = (open('/sys/devices/virtual/dmi/id/product_name','r').readline()).rep
 vendorstr = (open('/sys/devices/virtual/dmi/id/sys_vendor','r').readline()).replace('\n','')
 RAMstr = f"{none}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
+if Desktopstr == 'GNOME':
+    Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' ').replace('\n', '')
 DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
 CurStr = os.environ.get("XCURSOR_THEME")
 Res = f'{Monitor_Width}x{Monitor_Height}'
@@ -70,24 +72,24 @@ Res = f'{Monitor_Width}x{Monitor_Height}'
 Formatting all of the information into strings that can be used in the output
 '''
 if HideNameAndSystem == False:
-    User = f'{textcolor}{os.getlogin()}{none}@{textcolor}{os.uname().nodename}{none}'
+    User    = f'{textcolor}{os.getlogin()}{none}@{textcolor}{os.uname().nodename}{none}'
 else:
-    User = f'{textcolor}user{none}@{textcolor}linux{none}'
-OS = f'{textcolor}OS:\t\t{none} {OS_Release} {os.uname().machine}'
-Shell =f'{textcolor}Shell:\t\t{none} {shellstr}'
-Model = f'{textcolor}Model:\t\t{none} {modelstr}'
-Vendor = f'{textcolor}Vendor:\t\t{none} {vendorstr} '
-CPU = f'{textcolor}CPU:{none} \t\t{none} {CPU_Model_Name}({os.cpu_count()})'
-Kernel = f'{textcolor}Kernel:{none} \t{none} {os.uname().release}'
-RAM = f'{textcolor}Memory:{none} \t {RAMstr} {none}'
-Uptime = f'{textcolor}Uptime:{none} \t{none} {round(((float(uptime) / 60)),2)} Minutes'
-Desktop = f'{textcolor}Desktop:{none} \t {none}{Desktopstr}'
-DispServ = f"{textcolor}Display Server:{none}  {DispServStr}"
+    User    = f'{textcolor}user{none}@{textcolor}linux{none}'
+OS          = f'{textcolor}OS:\t\t{none} {OS_Release} {os.uname().machine}'
+Shell       = f'{textcolor}Shell:\t\t{none} {shellstr}'
+Model       = f'{textcolor}Model:\t\t{none} {modelstr}'
+Vendor      = f'{textcolor}Vendor:\t\t{none} {vendorstr} '
+CPU         = f'{textcolor}CPU:{none} \t\t{none} {CPU_Model_Name}({os.cpu_count()})'
+Kernel      = f'{textcolor}Kernel:{none} \t{none} {os.uname().release}'
+RAM         = f'{textcolor}Memory:{none} \t {RAMstr} {none}'
+Uptime      = f'{textcolor}Uptime:{none} \t{none} {round(((float(uptime) / 60)),2)} Minutes'
+Desktop     = f'{textcolor}Desktop:{none} \t {none}{Desktopstr}'
+DispServ    = f"{textcolor}Display Server:{none}  {DispServStr}"
 CursorTheme = f"{textcolor}Cursor Theme:{none}    {CurStr}"
-Resolution = f"{textcolor}Resolution:{none} \t {Res}"
-GPU = f"{textcolor}GPU:{none}\t\t {GPU_Pretty}"
+Resolution  = f"{textcolor}Resolution:{none} \t {Res}"
+GPU         = f"{textcolor}GPU:{none}\t\t {GPU_Pretty}"
 ColoredBlocks = (f'{black}███{red}███{green}███{yellow}███{blue}███{purple}███{cyan}███{bgrey}███{none}')
-ColoredBlocks2 = (f'{grey}███{bred}███{bgreen}███{byellow}███{bblue}███{magenta}███{bcyan}███{white}███{none}')
+ColoredBlocks_Lighter = (f'{grey}███{bred}███{bgreen}███{byellow}███{bblue}███{magenta}███{bcyan}███{white}███{none}')
 '''
 Print system information
 '''
@@ -105,7 +107,7 @@ l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███�
 l12 = f"  {c3}█████{c2}███████{c3}█████{none}"
 print(f"""{none}
 {l1}\t\t\t{User}
-{l2}\t\t\t{none}----------------------------------
+{l2}\t\t\t----------------------------------
 {l3}\t\t\t{OS}
 {l4}\t\t\t{Shell}
 {l5}\t\t{Model}
@@ -121,7 +123,7 @@ print(f"""{none}
 \t\t\t\t{GPU}
 
 \t\t\t\t{ColoredBlocks}
-\t\t\t\t{ColoredBlocks2}
+\t\t\t\t{ColoredBlocks_Lighter}
 
 """)
 
