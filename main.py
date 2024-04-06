@@ -63,18 +63,27 @@ modelstr = (open('/sys/devices/virtual/dmi/id/product_name','r').readline()).rep
 vendorstr = (open('/sys/devices/virtual/dmi/id/sys_vendor','r').readline()).replace('\n','')
 RAMstr = f"{none}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
-if Desktopstr == 'GNOME':
+if Desktopstr == "GNOME-Flashback:GNOME:":
+    Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' Flashback ').replace('\n', '')
+
+if Desktopstr == "GNOME" and not Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' ').replace('\n', '')
-DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
+
+
+if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME-Flashback:GNOME:":
+    DispServStr = "X11 with Metacity"
+else:
+    DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
 CurStr = os.environ.get("XCURSOR_THEME")
 Res = f'{Monitor_Width}x{Monitor_Height}'
 '''
 Formatting all of the information into strings that can be used in the output
 '''
 if HideNameAndSystem == False:
-    User    = f'{textcolor}{os.getlogin()}{none}@{textcolor}{os.uname().nodename}{none}'
+    User    = f'{textcolor}{os.getlogin()}{none}@{textcolor}{os.uname().nodename}{none}'    #   This is actually grabbing the username and system name, all from raw python
 else:
-    User    = f'{textcolor}user{none}@{textcolor}linux{none}'
+    User    = f'{textcolor}user{none}@{textcolor}linux{none}'   #   This Code just prevents the actual username of the system, and the system name from being shown.
+
 OS          = f'{textcolor}OS:\t\t{none} {OS_Release} {os.uname().machine}'
 Shell       = f'{textcolor}Shell:\t\t{none} {shellstr}'
 Model       = f'{textcolor}Model:\t\t{none} {modelstr}'
