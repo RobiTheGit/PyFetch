@@ -7,3 +7,12 @@ Like neofetch, but in python (WIP) For Debian Based Linux (Tested on Debian 12)
 TODO:
 
 Whatever comes to mind
+
+
+# How To Install As a Local Application
+
+. Rename main.py to PyFetch (No extension)
+
+. Move the file into `/homne/yourusernamehere/.local/bin`
+
+Now that you have "installed" it, type in your console `PyFetch` and you should get the output of the script
