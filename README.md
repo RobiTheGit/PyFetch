@@ -11,7 +11,7 @@ Whatever comes to mind
 
 # How To Install As a Local Application
 
-. Rename main.py to pyfetch (No extension)
+. Rename `main.py` to `pyfetch` (No extension)
 
 . Move the file into `/homne/yourusernamehere/.local/bin`
 
