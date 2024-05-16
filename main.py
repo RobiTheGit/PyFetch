@@ -52,11 +52,16 @@ OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"
 uptime = (open('/proc/uptime', 'r').readline().split(' '))[0]
 CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).replace('\n', '')).split(' ', 1))[1]
 try:
-    Monitor_Width = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[18]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('width', ''))
-    Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[19]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('height', ''))
-except: #This was added since monitor resolution code didn't work on Gentoo'
+    x = 0
+    if os.environ.get("XDG_CURRENT_DESKTOP") == "MATE":
+        x = 0 # Change depending on how monitors.xml is set up
+    Monitor_Width = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[18-x]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('width', ''))
+    Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[19-x]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('height', ''))
+
+except: #This was added since monitor resolution code didn't work on Gentoo, nor does it work in MATE
     Monitor_Width = 'UNKNOWN'
     Monitor_Height= 'UNKNOWN'
+
 mem = psutil.virtual_memory()
 shellstr = str(os.environ.get("SHELL")).replace('/bin/','').title()
 modelstr = (open('/sys/devices/virtual/dmi/id/product_name','r').readline()).replace('\n','')
