@@ -114,6 +114,7 @@ CursorTheme = f"{textcolor}Cursor Theme:{none}    {CurStr}"
 Resolution  = f"{textcolor}Resolution:{none} \t {Res}"
 GPU         = f"{textcolor}GPU:{none}\t\t {GPU_Pretty}"
 WM_Pretty   = f"{textcolor}Window Manager:{none}\t {WM}"
+Arch        = f"{textcolor}CPU Type:{none}\t {(os.popen('arch')).read()}"
 ColoredBlocks = (f'{black}███{red}███{green}███{yellow}███{blue}███{purple}███{cyan}███{bgrey}███{none}')
 ColoredBlocks_Lighter = (f'{grey}███{bred}███{bgreen}███{byellow}███{bblue}███{magenta}███{bcyan}███{white}███{none}')
 '''
@@ -148,6 +149,7 @@ print(f"""{none}
 \t\t\t\t{Resolution}
 \t\t\t\t{GPU}
 \t\t\t\t{WM_Pretty}
+\t\t\t\t{Arch}
 
 \t\t\t\t{ColoredBlocks}
 \t\t\t\t{ColoredBlocks_Lighter}
