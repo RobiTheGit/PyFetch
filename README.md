@@ -1,7 +1,7 @@
 # PyFetch
 Like neofetch, but in python (WIP) For Debian Based Linux (Tested on Debian 12)
 
-![image](https://github.com/RobiTheGit/PyFetch/assets/94720060/a9199b8f-735d-4fcf-a9f5-bc104fa3f908)
+![image](https://github.com/RobiTheGit/PyFetch/assets/94720060/157530cf-dd46-4af5-b18b-0026fdef02e1)
 
 
 TODO:
