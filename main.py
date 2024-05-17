@@ -41,7 +41,7 @@ c1 = white
 c2 = grey
 c3 = yellow
 textcolor = c3
-HideNameAndSystem = True
+HideNameAndSystem = False
 '''
 Get System Information
 '''
