@@ -47,7 +47,7 @@ Get System Information
 '''
 gpu1 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[0]).split(' ', 1)[1]
 gpu2 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[1]).replace(']', '')
-GPU_Pretty = gpu1 + gpu2
+GPU_Pretty = (gpu1 + gpu2).replace(" Corporation ",' ')
 OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
 uptime = (open('/proc/uptime', 'r').readline().split(' '))[0]
 CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).replace('\n', '')).split(' ', 1))[1]
