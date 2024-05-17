@@ -41,7 +41,7 @@ c1 = white
 c2 = grey
 c3 = yellow
 textcolor = c3
-HideNameAndSystem = False
+HideNameAndSystem = True
 '''
 Get System Information
 '''
@@ -65,7 +65,11 @@ except: #This was added since monitor resolution code didn't work on Gentoo, nor
 mem = psutil.virtual_memory()
 shellstr = str(os.environ.get("SHELL")).replace('/bin/','').title()
 modelstr = (open('/sys/devices/virtual/dmi/id/product_name','r').readline()).replace('\n','')
+
 vendorstr = (open('/sys/devices/virtual/dmi/id/sys_vendor','r').readline()).replace('\n','')
+if vendorstr == "ASUSTeK COMPUTER INC.":
+    vendorstr = "ASUS"
+
 RAMstr = f"{none}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
 if Desktopstr == "GNOME-Flashback:GNOME:":
@@ -73,10 +77,17 @@ if Desktopstr == "GNOME-Flashback:GNOME:":
 
 if Desktopstr == "GNOME" and not Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' ').replace('\n', '')
+    if Desktopstr.startswith("GNOME 4") or Desktopstr.startswith("GNOME 3"):
+        WM = "Mutter"
+    else:
+        WM = "Metacity"
 
-
-if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME-Flashback:GNOME:":
-    DispServStr = "X11 with Metacity"
+if os.environ.get("XDG_CURRENT_DESKTOP") == "KDE":
+    WM = "KWin"
+if os.environ.get("XDG_CURRENT_DESKTOP") == "LXDE":
+    WM = "LXDM"
+if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME-Flashback:GNOME:" or os.environ.get("XDG_CURRENT_DESKTOP") == "MATE":
+    WM = "Metacity"
 else:
     DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
 CurStr = os.environ.get("XCURSOR_THEME")
@@ -90,7 +101,7 @@ else:
     User    = f'{textcolor}user{none}@{textcolor}linux{none}'   #   This Code just prevents the actual username of the system, and the system name from being shown.
 
 OS          = f'{textcolor}OS:\t\t{none} {OS_Release} {os.uname().machine}'
-Shell       = f'{textcolor}Shell:\t\t{none} {shellstr}'
+Shell       = f'{textcolor}Terminal Shell:\t{none} {shellstr}'
 Model       = f'{textcolor}Model:\t\t{none} {modelstr}'
 Vendor      = f'{textcolor}Vendor:\t\t{none} {vendorstr} '
 CPU         = f'{textcolor}CPU:{none} \t\t{none} {CPU_Model_Name}({os.cpu_count()})'
@@ -102,6 +113,7 @@ DispServ    = f"{textcolor}Display Server:{none}  {DispServStr}"
 CursorTheme = f"{textcolor}Cursor Theme:{none}    {CurStr}"
 Resolution  = f"{textcolor}Resolution:{none} \t {Res}"
 GPU         = f"{textcolor}GPU:{none}\t\t {GPU_Pretty}"
+WM_Pretty   = f"{textcolor}Window Manager:{none}\t {WM}"
 ColoredBlocks = (f'{black}███{red}███{green}███{yellow}███{blue}███{purple}███{cyan}███{bgrey}███{none}')
 ColoredBlocks_Lighter = (f'{grey}███{bred}███{bgreen}███{byellow}███{bblue}███{magenta}███{bcyan}███{white}███{none}')
 '''
@@ -135,6 +147,7 @@ print(f"""{none}
 \t\t\t\t{CursorTheme}
 \t\t\t\t{Resolution}
 \t\t\t\t{GPU}
+\t\t\t\t{WM_Pretty}
 
 \t\t\t\t{ColoredBlocks}
 \t\t\t\t{ColoredBlocks_Lighter}
