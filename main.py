@@ -133,26 +133,26 @@ l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██�
 l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{none}"
 l12 = f"  {c3}█████{c2}███████{c3}█████{none}"
 print(f"""{none}
-{l1}\t\t\t{User}
-{l2}\t\t\t----------------------------------
-{l3}\t\t\t{OS}
-{l4}\t\t\t{Shell}
-{l5}\t\t{Model}
-{l6}\t\t{Vendor}
-{l7}\t\t{CPU}
-{l8}\t\t{Kernel}
-{l9}\t\t{RAM}
-{l10}\t\t{Uptime}
-{l11}\t\t{Desktop}
-{l12}\t\t{DispServ}
-\t\t\t\t{CursorTheme}
-\t\t\t\t{Resolution}
-\t\t\t\t{GPU}
-\t\t\t\t{WM_Pretty}
-\t\t\t\t{Arch}
+\t\t\t{User}
+\t\t\t----------------------------------
+{l1}\t\t{OS}
+{l2}\t\t{Shell}
+{l3}\t\t{Model}
+{l4}\t\t{Vendor}
+{l5}\t{CPU}
+{l6}\t{Kernel}
+{l7}\t{RAM}
+{l8}\t{Uptime}
+{l9}\t{Desktop}
+{l10}\t{DispServ}
+{l11}\t{CursorTheme}
+{l12}\t{Resolution}
+\t\t\t{GPU}
+\t\t\t{WM_Pretty}
+\t\t\t{Arch}
 
-\t\t\t\t{ColoredBlocks}
-\t\t\t\t{ColoredBlocks_Lighter}
+\t\t\t{ColoredBlocks}
+\t\t\t{ColoredBlocks_Lighter}
 
 """)
 
