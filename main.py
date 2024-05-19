@@ -64,6 +64,9 @@ except: #This was added since monitor resolution code didn't work on Gentoo, nor
 
 mem = psutil.virtual_memory()
 shellstr = str(os.environ.get("SHELL")).replace('/bin/','').title()
+if shellstr == "Bash":
+    BashVer = os.popen("bash --version | head -1 | tr ' ' '\n' | grep 'version' -A1 | grep -v 'version'").readline().replace('\n','')
+    shellstr = f"Bash {BashVer}"
 modelstr = (open('/sys/devices/virtual/dmi/id/product_name','r').readline()).replace('\n','')
 
 vendorstr = (open('/sys/devices/virtual/dmi/id/sys_vendor','r').readline()).replace('\n','')
