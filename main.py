@@ -94,7 +94,7 @@ if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME-Flashback:GNOME:" or os.envir
 else:
     DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
     if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME":
-        CurStr = (os.popen('gtk-query-settings gtk-cursor-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-cursor-theme-name:', '').lstrip()
+        CurStr = (os.popen('gtk-query-settings gtk-cursor-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-cursor-theme-name:', '').strip()
     else:
         CurStr = os.environ.get("XCURSOR_THEME")
 Res = f'{Monitor_Width}x{Monitor_Height}'
