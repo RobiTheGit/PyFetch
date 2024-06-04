@@ -41,7 +41,7 @@ c1 = white
 c2 = grey
 c3 = yellow
 textcolor = c3
-HideNameAndSystem = False
+HideNameAndSystem = False   # I'd like to make this a command line option at some point
 '''
 Get System Information
 '''
@@ -93,7 +93,10 @@ if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME-Flashback:GNOME:" or os.envir
     WM = "Metacity"
 else:
     DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
-CurStr = os.environ.get("XCURSOR_THEME")
+    if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME":
+        CurStr = (os.popen('gtk-query-settings gtk-cursor-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-cursor-theme-name:', '').lstrip()
+    else:
+        CurStr = os.environ.get("XCURSOR_THEME")
 Res = f'{Monitor_Width}x{Monitor_Height}'
 '''
 Formatting all of the information into strings that can be used in the output
@@ -101,47 +104,49 @@ Formatting all of the information into strings that can be used in the output
 if HideNameAndSystem == False:
     User    = f'{textcolor}{os.getlogin()}{none}@{textcolor}{os.uname().nodename}{none}'    #   This is actually grabbing the username and system name, all from raw python
 else:
-    User    = f'{textcolor}user{none}@{textcolor}linux{none}'   #   This Code just prevents the actual username of the system, and the system name from being shown.
+    User    = f'{textcolor}user{none}@{textcolor}linux{none}'   #   This Code just prevents the actual username of the system, and the system name from being shown. This is used mostly for the readme
 
-OS          = f'{textcolor}OS:\t\t{none} {OS_Release} {os.uname().machine}'
-Shell       = f'{textcolor}Terminal Shell:\t{none} {shellstr}'
-Model       = f'{textcolor}Model:\t\t{none} {modelstr}'
-Vendor      = f'{textcolor}Vendor:\t\t{none} {vendorstr} '
-CPU         = f'{textcolor}CPU:{none} \t\t{none} {CPU_Model_Name}({os.cpu_count()})'
-Kernel      = f'{textcolor}Kernel:{none} \t{none} {os.uname().release}'
-RAM         = f'{textcolor}Memory (RAM):{none} \t {RAMstr} {none}'
-Uptime      = f'{textcolor}Uptime:{none} \t{none} {round(((float(uptime) / 60)),2)} Minutes'
-Desktop     = f'{textcolor}Desktop:{none} \t {none}{Desktopstr}'
-DispServ    = f"{textcolor}Display Server:{none}  {DispServStr}"
-CursorTheme = f"{textcolor}Cursor Theme:{none}    {CurStr}"
-Resolution  = f"{textcolor}Resolution:{none} \t {Res}"
-GPU         = f"{textcolor}GPU:{none}\t\t {GPU_Pretty}"
-WM_Pretty   = f"{textcolor}Window Manager:{none}\t {WM}"
-Arch        = f"{textcolor}CPU Type:{none}\t {(os.popen('arch')).read()}"
-ColoredBlocks = (f'{black}███{red}███{green}███{yellow}███{blue}███{purple}███{cyan}███{bgrey}███{none}')
-ColoredBlocks_Lighter = (f'{grey}███{bred}███{bgreen}███{byellow}███{bblue}███{magenta}███{bcyan}███{white}███{none}')
+OS             = f'{textcolor}OS:\t\t{none} {OS_Release} {os.uname().machine}'
+Shell          = f'{textcolor}Terminal Shell:\t{none} {shellstr}'
+Model          = f'{textcolor}Model:\t\t{none} {modelstr}'
+Vendor         = f'{textcolor}Vendor:\t\t{none} {vendorstr} '
+CPU            = f'{textcolor}CPU:{none} \t\t{none} {CPU_Model_Name}({os.cpu_count()})'
+Kernel         = f'{textcolor}Kernel:{none} \t{none} {os.uname().release}'
+RAM            = f'{textcolor}Memory (RAM):{none} \t {RAMstr} {none}'
+Uptime         = f'{textcolor}Uptime:{none} \t{none} {round(((float(uptime) / 60)),2)} Minutes'
+Desktop        = f'{textcolor}Desktop:{none} \t {none}{Desktopstr}'
+DispServ       = f"{textcolor}Display Server:{none}  {DispServStr}"
+CursorTheme    = f"{textcolor}Cursor Theme:{none}    {CurStr}"
+Resolution     = f"{textcolor}Resolution:{none} \t {Res}"
+GPU            = f"{textcolor}GPU:{none}\t\t {GPU_Pretty}"
+WM_Pretty      = f"{textcolor}Window Manager:{none}\t {WM}"
+Arch           = f"{textcolor}CPU Type:{none}\t {(os.popen('arch')).read()}"
+ColoredBlocks  = (f'{black}███{red}███{green}███{yellow}███{blue}███{purple}███{cyan}███{bgrey}███{none}')
+ClrBlk_Lighter = (f'{grey}███{bred}███{bgreen}███{byellow}███{bblue}███{magenta}███{bcyan}███{white}███{none}')
 '''
 Print system information
+
+Image res, 21c x 12c; c = characters
 '''
-l1  = f"        {c2}█████{none}"
-l2  = f"       {c2}███████{none}"
-l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{none}"
-l4  = f"       {c2}█{c3}█████{c2}█{none}"
-l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{none}"
-l6  = f"    {c2}█{c1}██████████{c2}██{none}"
-l7  = f"   {c2}█{c1}████████████{c2}██{none}"
-l8  = f"   {c2}█{c1}████████████{c2}███{none}"
-l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{none}"
+l1  = f"        {c2}█████{none}        "
+l2  = f"       {c2}███████{none}       "
+l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{none}       "
+l4  = f"       {c2}█{c3}█████{c2}█{none}       "
+l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{none}     "
+l6  = f"    {c2}█{c1}██████████{c2}██{none}    "
+l7  = f"   {c2}█{c1}████████████{c2}██{none}   "
+l8  = f"   {c2}█{c1}████████████{c2}███{none}  "
+l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{none}  "
 l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{none}"
 l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{none}"
-l12 = f"  {c3}█████{c2}███████{c3}█████{none}"
+l12 = f"  {c3}█████{c2}███████{c3}█████{none}  "
 print(f"""{none}
 \t\t\t{User}
 \t\t\t----------------------------------
-{l1}\t\t{OS}
-{l2}\t\t{Shell}
-{l3}\t\t{Model}
-{l4}\t\t{Vendor}
+{l1}\t{OS}
+{l2}\t{Shell}
+{l3}\t{Model}
+{l4}\t{Vendor}
 {l5}\t{CPU}
 {l6}\t{Kernel}
 {l7}\t{RAM}
@@ -155,7 +160,7 @@ print(f"""{none}
 \t\t\t{Arch}
 
 \t\t\t{ColoredBlocks}
-\t\t\t{ColoredBlocks_Lighter}
+\t\t\t{ClrBlk_Lighter}
 
 """)
 
