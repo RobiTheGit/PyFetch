@@ -93,6 +93,8 @@ if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME-Flashback:GNOME:" or os.envir
     WM = "Metacity"
 else:
     DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
+    if WM == '':
+        WM = 'not implemented'
     if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME":
         CurStr = (os.popen('gtk-query-settings gtk-cursor-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-cursor-theme-name:', '').strip()
     else:
