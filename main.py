@@ -49,7 +49,7 @@ gpu1 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[
 gpu2 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[1]).replace(']', '')
 GPU_Pretty = (gpu1 + gpu2).replace(" Corporation ",' ')
 OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
-uptime = (open('/proc/uptime', 'r').readline().split(' '))[0]
+uptime = str(round((float((open('/proc/uptime', 'r').readline().split(' '))[0]) / 60),0)).replace('.0','')
 CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).replace('\n', '')).split(' ', 1))[1]
 try:
     x = 0
@@ -58,7 +58,7 @@ try:
     Monitor_Width = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[18-x]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('width', ''))
     Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[19-x]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('height', ''))
 
-except: #This was added since monitor resolution code didn't work on Gentoo, nor does it work in MATE
+except: #This was added since monitor resolution code didn't work on Gentoo
     Monitor_Width = 'UNKNOWN'
     Monitor_Height= 'UNKNOWN'
 
@@ -71,7 +71,7 @@ modelstr = (open('/sys/devices/virtual/dmi/id/product_name','r').readline()).rep
 
 vendorstr = (open('/sys/devices/virtual/dmi/id/sys_vendor','r').readline()).replace('\n','')
 if vendorstr == "ASUSTeK COMPUTER INC.":
-    vendorstr = "ASUS"
+    vendorstr = "ASUS (ASUSTeK COMPUTER INC.)"
 
 RAMstr = f"{none}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
@@ -113,7 +113,7 @@ Vendor         = f'{textcolor}Vendor:\t\t{none} {vendorstr} '
 CPU            = f'{textcolor}CPU:{none} \t\t{none} {CPU_Model_Name}({os.cpu_count()})'
 Kernel         = f'{textcolor}Kernel:{none} \t{none} {os.uname().release}'
 RAM            = f'{textcolor}Memory (RAM):{none} \t {RAMstr} {none}'
-Uptime         = f'{textcolor}Uptime:{none} \t{none} {round(((float(uptime) / 60)),2)} Minutes'
+Uptime         = f'{textcolor}Uptime:{none} \t{none} {uptime} Minutes'
 Desktop        = f'{textcolor}Desktop:{none} \t {none}{Desktopstr}'
 DispServ       = f"{textcolor}Display Server:{none}  {DispServStr}"
 CursorTheme    = f"{textcolor}Cursor Theme:{none}    {CurStr}"
