@@ -36,7 +36,7 @@ greenBG = f'\033[1;32;42m'
 redBG = f'\033[1;31;41m'
 blackBG = f'\033[1;30;40m'
 
-
+WM = ''
 c1 = white
 c2 = grey
 c3 = yellow
