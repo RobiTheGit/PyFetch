@@ -77,7 +77,9 @@ RAMstr = f"{none}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.to
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
 if Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' Flashback ').replace('\n', '')
-
+if Desktopstr == "X-Cinnamon":
+        Desktopstr = 'Cinnamon'
+        WM = "Mutter"
 if Desktopstr == "GNOME" and not Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' ').replace('\n', '')
     if Desktopstr.startswith("GNOME 4") or Desktopstr.startswith("GNOME 3"):
