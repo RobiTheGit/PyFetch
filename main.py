@@ -79,7 +79,7 @@ if Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' Flashback ').replace('\n', '')
 if Desktopstr == "X-Cinnamon":
         Desktopstr = 'Cinnamon'
-        WM = "Mutter"
+        WM = "Mutter (Muffin)"
 if Desktopstr == "GNOME" and not Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' ').replace('\n', '')
     if Desktopstr.startswith("GNOME 4") or Desktopstr.startswith("GNOME 3"):
