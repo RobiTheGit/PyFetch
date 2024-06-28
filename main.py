@@ -97,7 +97,7 @@ else:
     DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
     if WM == '':
         WM = 'not implemented'
-    if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME":
+    if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME" or os.environ.get("XDG_CURRENT_DESKTOP") == "X-Cinnamon":
         CurStr = (os.popen('gtk-query-settings gtk-cursor-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-cursor-theme-name:', '').strip()
     else:
         CurStr = os.environ.get("XCURSOR_THEME")
