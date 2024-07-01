@@ -9,8 +9,8 @@ TODO:
 Whatever comes to mind
 
 Depends:
-Python 3.6 or newer with psutil, os, sys
-wmctrl, lspci
+`Python 3.6` or newer with `psutil`, `os`, & `sys`
+`wmctrl` & `lspci` also need to be installed
 
 # How To Install As a Local Application
 
