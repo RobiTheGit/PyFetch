@@ -149,10 +149,10 @@ print(f"""{none}
 {l8}\t{Uptime}
 {l9}\t{Desktop}
 {l10}\t{DispServ}
-{l11}\t{CursorTheme}
+{l11}\t{WM_Pretty}
 {l12}\t{Resolution}
 \t\t\t{GPU}
-\t\t\t{WM_Pretty}
+\t\t\t{CursorTheme}
 \t\t\t{Arch}
 
 \t\t\t{ColoredBlocks}
