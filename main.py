@@ -2,6 +2,7 @@
 # Made for Debain based Linux
 # If you have a solution to use other distros, fix problems, etc, put a pull request or issue in
 # PyFetch - RobiTheGit/RobiWanKenobi (2024)
+# wmctrl is now required
 import sys
 import os
 import psutil
@@ -75,28 +76,19 @@ if vendorstr == "ASUSTeK COMPUTER INC.":
 
 RAMstr = f"{none}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
+try:
+    WM = os.popen("wmctrl -m | awk -F: '/Name: /{print $2}'").read().replace('\n', '').strip()
+except:
+    WM = "wmctrl is not installed"
 if Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' Flashback ').replace('\n', '')
 if Desktopstr == "X-Cinnamon":
         Desktopstr = 'Cinnamon'
-        WM = "Mutter (Muffin)"
 if Desktopstr == "GNOME" and not Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' ').replace('\n', '')
-    if Desktopstr.startswith("GNOME 4") or Desktopstr.startswith("GNOME 3"):
-        WM = "Mutter"
-    else:
-        WM = "Metacity"
 
-if os.environ.get("XDG_CURRENT_DESKTOP") == "KDE":
-    WM = "KWin"
-if os.environ.get("XDG_CURRENT_DESKTOP") == "LXDE":
-    WM = "LXDM"
-if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME-Flashback:GNOME:" or os.environ.get("XDG_CURRENT_DESKTOP") == "MATE":
-    WM = "Metacity"
 else:
     DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
-    if WM == '':
-        WM = 'not implemented'
     if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME" or os.environ.get("XDG_CURRENT_DESKTOP") == "X-Cinnamon":
         CurStr = (os.popen('gtk-query-settings gtk-cursor-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-cursor-theme-name:', '').strip()
     else:
