@@ -8,6 +8,9 @@ TODO:
 
 Whatever comes to mind
 
+Depends:
+Python 3.6 or newer with psutil, os, sys
+wmctrl, lspci
 
 # How To Install As a Local Application
 
