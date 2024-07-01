@@ -1,7 +1,7 @@
 # PyFetch
-Like neofetch, but in python (WIP) For Debian Based Linux (Tested on Debian 12)
+Like neofetch, but in python (WIP) For Linux (Tested on Debian 12)
 
-![image](https://github.com/RobiTheGit/PyFetch/assets/94720060/c3e437f8-58b0-42ea-9071-f11796efec80)
+![image](https://github.com/RobiTheGit/PyFetch/assets/94720060/5620ab86-1b77-415f-bade-fa251c259837)
 
 
 TODO:
