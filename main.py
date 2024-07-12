@@ -139,50 +139,31 @@ l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}�
 l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{none}"
 l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{none}"
 l12 = f"  {c3}█████{c2}███████{c3}█████{none}  "
+
+
+print(f"{none}\n\t\t\t{User}")
+print(f"\t\t\t----------------------------------")
+print(f"{l1}\t{OS}")
+print(f"{l2}\t{Shell}")
+print(f"{l3}\t{Model}")
+print(f"{l4}\t{Vendor}")
+print(f"{l5}\t{CPU}")
+print(f"{l6}\t{Kernel}")
+print(f"{l7}\t{RAM}")
+print(f"{l8}\t{Uptime}")
+print(f"{l9}\t{Desktop}")
+print(f"{l10}\t{DispServ}")
 if WM_Pretty != "":
-    print(f"""{none}
-\t\t\t{User}
-\t\t\t----------------------------------
-{l1}\t{OS}
-{l2}\t{Shell}
-{l3}\t{Model}
-{l4}\t{Vendor}
-{l5}\t{CPU}
-{l6}\t{Kernel}
-{l7}\t{RAM}
-{l8}\t{Uptime}
-{l9}\t{Desktop}
-{l10}\t{DispServ}
-{l11}\t{WM_Pretty}
-{l12}\t{Resolution}
-\t\t\t{GPU}
-\t\t\t{CursorTheme}
-\t\t\t{Arch}
 
-\t\t\t{ColoredBlocks}
-\t\t\t{ClrBlk_Lighter}
-
-""")
+    print(f"{l11}\t{WM_Pretty}")
+    print(f"{l12}\t{Resolution}")
+    print(f"\t\t\t{GPU}")
 else:
-    print(f"""{none}
-\t\t\t{User}
-\t\t\t----------------------------------
-{l1}\t{OS}
-{l2}\t{Shell}
-{l3}\t{Model}
-{l4}\t{Vendor}
-{l5}\t{CPU}
-{l6}\t{Kernel}
-{l7}\t{RAM}
-{l8}\t{Uptime}
-{l9}\t{Desktop}
-{l10}\t{DispServ}
-{l11}\t{Resolution}
-{l12}\t{GPU}
-\t\t\t{CursorTheme}
-\t\t\t{Arch}
+    print(f"{l11}\t{Resolution}")
+    print(f"{l12}\t{GPU}")
 
-\t\t\t{ColoredBlocks}
-\t\t\t{ClrBlk_Lighter}
+print(f"\t\t\t{CursorTheme}")
+print(f"\t\t\t{Arch}")
+print(f"\n\t\t\t{ColoredBlocks}")
+print(f"\t\t\t{ClrBlk_Lighter}")
 
-""")
