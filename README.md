@@ -11,7 +11,8 @@ Whatever comes to mind
 Depends:
 `Python 3.6` or newer with `psutil`, `os`, & `sys`
 
-`wmctrl` & `lspci` also need to be installed
+`lspci` also needs to be installed
+`wmctrl` needs to be installed if you want the window manager to show up in the output
 
 # How To Install As a Local Application
 
