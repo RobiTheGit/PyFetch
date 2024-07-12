@@ -2,7 +2,7 @@
 # Made for Debain based Linux
 # If you have a solution to use other distros, fix problems, etc, put a pull request or issue in
 # PyFetch - RobiTheGit/RobiWanKenobi (2024)
-# wmctrl is now required
+# wmctrl is now required if you want the window manager stuff
 import sys
 import os
 import psutil
@@ -79,7 +79,7 @@ Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
 try:
     WM = os.popen("wmctrl -m | awk -F: '/Name: /{print $2}'").read().replace('\n', '').strip()
 except:
-    WM = "wmctrl is not installed"
+    WM = ""
 if Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' Flashback ').replace('\n', '')
 if Desktopstr == "X-Cinnamon":
@@ -115,7 +115,10 @@ DispServ       = f"{textcolor}Display Server:{none}  {DispServStr}"
 CursorTheme    = f"{textcolor}Cursor Theme:{none}    {CurStr}"
 Resolution     = f"{textcolor}Resolution:{none} \t {Res}"
 GPU            = f"{textcolor}GPU:{none}\t\t {GPU_Pretty}"
-WM_Pretty      = f"{textcolor}Window Manager:{none}\t {WM}"
+if WM == "":
+    WM_Pretty  = ""
+else:
+    WM_Pretty  = f"{textcolor}Window Manager:{none}\t {WM}"
 Arch           = f"{textcolor}CPU Type:{none}\t {(os.popen('arch')).read()}"
 ColoredBlocks  = (f'{black}███{red}███{green}███{yellow}███{blue}███{purple}███{cyan}███{bgrey}███{none}')
 ClrBlk_Lighter = (f'{grey}███{bred}███{bgreen}███{byellow}███{bblue}███{magenta}███{bcyan}███{white}███{none}')
@@ -136,7 +139,8 @@ l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}�
 l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{none}"
 l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{none}"
 l12 = f"  {c3}█████{c2}███████{c3}█████{none}  "
-print(f"""{none}
+if WM_Pretty != "":
+    print(f"""{none}
 \t\t\t{User}
 \t\t\t----------------------------------
 {l1}\t{OS}
@@ -159,4 +163,26 @@ print(f"""{none}
 \t\t\t{ClrBlk_Lighter}
 
 """)
+else:
+    print(f"""{none}
+\t\t\t{User}
+\t\t\t----------------------------------
+{l1}\t{OS}
+{l2}\t{Shell}
+{l3}\t{Model}
+{l4}\t{Vendor}
+{l5}\t{CPU}
+{l6}\t{Kernel}
+{l7}\t{RAM}
+{l8}\t{Uptime}
+{l9}\t{Desktop}
+{l10}\t{DispServ}
+{l11}\t{Resolution}
+{l12}\t{GPU}
+\t\t\t{CursorTheme}
+\t\t\t{Arch}
 
+\t\t\t{ColoredBlocks}
+\t\t\t{ClrBlk_Lighter}
+
+""")
