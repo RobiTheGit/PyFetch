@@ -40,7 +40,7 @@ blackBG = f'\033[1;30;40m'
 WM = ''
 c1 = white
 c2 = grey
-c3 = yellow
+c3 = byellow
 textcolor = c3
 HideNameAndSystem = False   # I'd like to make this a command line option at some point
 '''
@@ -154,7 +154,6 @@ print(f"{l8}\t{Uptime}")
 print(f"{l9}\t{Desktop}")
 print(f"{l10}\t{DispServ}")
 if WM_Pretty != "":
-
     print(f"{l11}\t{WM_Pretty}")
     print(f"{l12}\t{Resolution}")
     print(f"\t\t\t{GPU}")
