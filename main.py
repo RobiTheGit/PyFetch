@@ -146,8 +146,8 @@ l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███�
 l12 = f"  {c3}█████{c2}███████{c3}█████{none}  "
 
 
-print(f"{none}\n\t\t\t{User}")
-print(f"\t\t\t----------------------------------")
+print(f"{none}\n                        {User}")
+print(f"                        ----------------------------------")
 print(f"{l1}\t{OS}")
 print(f"{l2}\t{Shell}")
 print(f"{l3}\t{Model}")
@@ -161,16 +161,16 @@ print(f"{l10}\t{DispServ}")
 if WM_Pretty != "":
     print(f"{l11}\t{WM_Pretty}")
     print(f"{l12}\t{Resolution}")
-    print(f"\t\t\t{GPU}")
+    print(f"                        {GPU}")
 else:
     print(f"{l11}\t{Resolution}")
     print(f"{l12}\t{GPU}")
 if os.environ.get("XDG_SESSION_TYPE") == 'tty':
     pass
 else:
-    print(f"\t\t\t{CursorTheme}")
+    print(f"                        {CursorTheme}")
 
-print(f"\t\t\t{Arch}")
-print(f"\n\t\t\t{ColoredBlocks}")
-print(f"\t\t\t{ClrBlk_Lighter}")
+print(f"                        {Arch}")
+print(f"\n                        {ColoredBlocks}")
+print(f"                        {ClrBlk_Lighter}")
 
