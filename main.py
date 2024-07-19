@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-# Made for Debain based Linux
+# Neofetch clone made for Debain based Linux
 # If you have a solution to use other distros, fix problems, etc, put a pull request or issue in
 # PyFetch - RobiTheGit/RobiWanKenobi (2024)
 # wmctrl is now required if you want the window manager stuff
+
+
 import sys
 import os
 import psutil
@@ -42,6 +44,7 @@ c1 = white
 c2 = grey
 c3 = byellow
 textcolor = c3
+line_diff = 0
 HideNameAndSystem = False   # I'd like to make this a command line option at some point
 '''
 Get System Information
@@ -55,7 +58,7 @@ CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).r
 try:
     x = 0
     if os.environ.get("XDG_CURRENT_DESKTOP") == "MATE":
-        x = 0 # Change depending on how monitors.xml is set up
+        x = line_diff # Change depending on how monitors.xml is set up
     Monitor_Width = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[18-x]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('width', ''))
     Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[19-x]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('height', ''))
 
@@ -76,6 +79,8 @@ if vendorstr == "ASUSTeK COMPUTER INC.":
 
 RAMstr = f"{none}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
+if os.environ.get("XDG_SESSION_TYPE") == 'tty':
+    Desktopstr = "Tty"
 try:
     WM = os.popen("wmctrl -m | awk -F: '/Name: /{print $2}'").read().replace('\n', '').strip()
 except:
@@ -160,8 +165,11 @@ if WM_Pretty != "":
 else:
     print(f"{l11}\t{Resolution}")
     print(f"{l12}\t{GPU}")
+if os.environ.get("XDG_SESSION_TYPE") == 'tty':
+    pass
+else:
+    print(f"\t\t\t{CursorTheme}")
 
-print(f"\t\t\t{CursorTheme}")
 print(f"\t\t\t{Arch}")
 print(f"\n\t\t\t{ColoredBlocks}")
 print(f"\t\t\t{ClrBlk_Lighter}")
