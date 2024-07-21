@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-# Neofetch clone made for Debain based Linux
+# Neofetch clone made for Debain based Linux, but is known to mostly work on Gentoo
 # If you have a solution to use other distros, fix problems, etc, put a pull request or issue in
 # PyFetch - RobiTheGit/RobiWanKenobi (2024)
-# wmctrl is now required if you want the window manager stuff
-
+# wmctrl is now required if you want the window manager stuff, but if it isn't installed, the script will still run and not error out
 
 import sys
 import os
@@ -11,47 +10,45 @@ import psutil
 '''
 Variable Setup
 '''
-bcyan = f'\033[1;38;5;14m'
-magenta  = f'\033[1;38;5;13m'
-bblue = f'\033[1;38;5;12m'
-byellow = f'\033[1;38;5;11m'
-bgreen = f'\033[1;38;5;10m'
-bred = f'\033[1;38;5;9m'
-bgrey = f'\033[1;38;5;7m'
-grey = f'\033[1;38;5;8m'
-white = f'\033[1;38;5;15m'
-cyan = f'\033[1;38;5;6m'
-purple = f'\033[1;38;5;5m'
-blue = f'\033[1;38;5;4m'
-yellow = f'\033[1;38;5;3m'
-green = f'\033[1;38;5;2m'
-red = f'\033[1;38;5;1m'
-black = f'\033[1;38;5;0m'
-none = f'\033[1;00m'
+Bright_Cyan = f'\033[1;38;5;14m'
+Magenta  = f'\033[1;38;5;13m'
+Bright_Blue = f'\033[1;38;5;12m'
+Bright_Yellow = f'\033[1;38;5;11m'
+Bright_Green = f'\033[1;38;5;10m'
+Bright_Red = f'\033[1;38;5;9m'
+Bright_Grey = f'\033[1;38;5;7m'
+Grey = f'\033[1;38;5;8m'
+White = f'\033[1;38;5;15m'
+Cyan = f'\033[1;38;5;6m'
+Purple = f'\033[1;38;5;5m'
+Blue = f'\033[1;38;5;4m'
+Yellow = f'\033[1;38;5;3m'
+Green = f'\033[1;38;5;2m'
+Red = f'\033[1;38;5;1m'
+Black = f'\033[1;38;5;0m'
+DefaultColor = f'\033[1;00m'
 
 
-whiteBG = f'\033[1;37;47m'
-cyanBG = f'\033[1;36;46m'
-purpleBG = f'\033[1;35;45m'
-blueBG = f'\033[1;34;44m'
-yellowBG = f'\033[1;33;43m'
-greenBG = f'\033[1;32;42m'
-redBG = f'\033[1;31;41m'
-blackBG = f'\033[1;30;40m'
+White_Background = f'\033[1;37;47m'
+Cyan_Background = f'\033[1;36;46m'
+Purple_Background = f'\033[1;35;45m'
+Blue_Background = f'\033[1;34;44m'
+Yellow_Background = f'\033[1;33;43m'
+Green_Background = f'\033[1;32;42m'
+Red_Background = f'\033[1;31;41m'
+Black_Background = f'\033[1;30;40m'
 
 WM = ''
-c1 = white
-c2 = grey
-c3 = byellow
-textcolor = c3
+c1 = White
+c2 = Grey
+c3 = Bright_Yellow
+TextColor = c3
 line_diff = 0
 HideNameAndSystem = False   # I'd like to make this a command line option at some point
 '''
 Get System Information
 '''
-gpu1 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[0]).split(' ', 1)[1]
-gpu2 = (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[1]).replace(']', '')
-GPU_Pretty = (gpu1 + gpu2).replace(" Corporation ",' ')
+GPU_Pretty = ((((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[0]).split(' ', 1)[1] + (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[1]).replace(']', '')).replace(" Corporation ",' ')
 OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
 uptime = str(round((float((open('/proc/uptime', 'r').readline().split(' '))[0]) / 60),0)).replace('.0','')
 CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).replace('\n', '')).split(' ', 1))[1]
@@ -77,7 +74,7 @@ vendorstr = (open('/sys/devices/virtual/dmi/id/sys_vendor','r').readline()).repl
 if vendorstr == "ASUSTeK COMPUTER INC.":
     vendorstr = "ASUS (ASUSTeK COMPUTER INC.)"
 
-RAMstr = f"{none}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
+RAMstr = f"{DefaultColor}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
 if os.environ.get("XDG_SESSION_TYPE") == 'tty':
     Desktopstr = "Tty"
@@ -103,50 +100,50 @@ Res = f'{Monitor_Width}x{Monitor_Height}'
 Formatting all of the information into strings that can be used in the output
 '''
 if HideNameAndSystem == False:
-    User    = f'{textcolor}{os.getlogin()}{none}@{textcolor}{os.uname().nodename}{none}'    #   This is actually grabbing the username and system name, all from raw python
+    User    = f'{TextColor}{os.getlogin()}{DefaultColor}@{TextColor}{os.uname().nodename}{DefaultColor}'    #   This is actually grabbing the username and system name, all from raw python
 else:
-    User    = f'{textcolor}user{none}@{textcolor}linux{none}'   #   This Code just prevents the actual username of the system, and the system name from being shown. This is used mostly for the readme
+    User    = f'{TextColor}user{DefaultColor}@{TextColor}linux{DefaultColor}'   #   This Code just prevents the actual username of the system, and the system name from being shown. This is used mostly for the readme
 
-OS             = f'{textcolor}OS:\t\t{none} {OS_Release} {os.uname().machine}'
-Shell          = f'{textcolor}Terminal Shell:\t{none} {shellstr}'
-Model          = f'{textcolor}Model:\t\t{none} {modelstr}'
-Vendor         = f'{textcolor}Vendor:\t\t{none} {vendorstr} '
-CPU            = f'{textcolor}CPU:{none} \t\t{none} {CPU_Model_Name}({os.cpu_count()})'
-Kernel         = f'{textcolor}Kernel:{none} \t{none} {os.uname().release}'
-RAM            = f'{textcolor}Memory (RAM):{none} \t {RAMstr} {none}'
-Uptime         = f'{textcolor}Uptime:{none} \t{none} {uptime} Minutes'
-Desktop        = f'{textcolor}Desktop:{none} \t {none}{Desktopstr}'
-DispServ       = f"{textcolor}Display Server:{none}  {DispServStr}"
-CursorTheme    = f"{textcolor}Cursor Theme:{none}    {CurStr}"
-Resolution     = f"{textcolor}Resolution:{none} \t {Res}"
-GPU            = f"{textcolor}GPU:{none}\t\t {GPU_Pretty}"
+OS             = f'{TextColor}OS:\t\t{DefaultColor} {OS_Release} {os.uname().machine}'
+Shell          = f'{TextColor}Terminal Shell:\t{DefaultColor} {shellstr}'
+Model          = f'{TextColor}Model:\t\t{DefaultColor} {modelstr}'
+Vendor         = f'{TextColor}Vendor:\t\t{DefaultColor} {vendorstr} '
+CPU            = f'{TextColor}CPU:{DefaultColor} \t\t{DefaultColor} {CPU_Model_Name}({os.cpu_count()})'
+Kernel         = f'{TextColor}Kernel:{DefaultColor} \t{DefaultColor} {os.uname().release}'
+RAM            = f'{TextColor}Memory (RAM):{DefaultColor} \t {RAMstr} {DefaultColor}'
+Uptime         = f'{TextColor}Uptime:{DefaultColor} \t{DefaultColor} {uptime} Minutes'
+Desktop        = f'{TextColor}Desktop:{DefaultColor} \t {DefaultColor}{Desktopstr}'
+DispServ       = f"{TextColor}Display Server:{DefaultColor}  {DispServStr}"
+CursorTheme    = f"{TextColor}Cursor Theme:{DefaultColor}    {CurStr}"
+Resolution     = f"{TextColor}Resolution:{DefaultColor} \t {Res}"
+GPU            = f"{TextColor}GPU:{DefaultColor}\t\t {GPU_Pretty}"
 if WM == "":
     WM_Pretty  = ""
 else:
-    WM_Pretty  = f"{textcolor}Window Manager:{none}\t {WM}"
-Arch           = f"{textcolor}CPU Type:{none}\t {(os.popen('arch')).read()}"
-ColoredBlocks  = (f'{black}███{red}███{green}███{yellow}███{blue}███{purple}███{cyan}███{bgrey}███{none}')
-ClrBlk_Lighter = (f'{grey}███{bred}███{bgreen}███{byellow}███{bblue}███{magenta}███{bcyan}███{white}███{none}')
+    WM_Pretty  = f"{TextColor}Window Manager:{DefaultColor}\t {WM}"
+Arch           = f"{TextColor}CPU Type:{DefaultColor}\t {(os.popen('arch')).read()}"
+ColoredBlocks  = (f'{Black}███{Red}███{Green}███{Yellow}███{Blue}███{Purple}███{Cyan}███{Bright_Grey}███{DefaultColor}')
+ClrBlk_Lighter = (f'{Grey}███{Bright_Red}███{Bright_Green}███{Bright_Yellow}███{Bright_Blue}███{Magenta}███{Bright_Cyan}███{White}███{DefaultColor}')
 '''
 Print system information
 
 Image res, 21c x 12c; c = characters
 '''
-l1  = f"        {c2}█████{none}        "
-l2  = f"       {c2}███████{none}       "
-l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{none}       "
-l4  = f"       {c2}█{c3}█████{c2}█{none}       "
-l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{none}     "
-l6  = f"    {c2}█{c1}██████████{c2}██{none}    "
-l7  = f"   {c2}█{c1}████████████{c2}██{none}   "
-l8  = f"   {c2}█{c1}████████████{c2}███{none}  "
-l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{none}  "
-l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{none}"
-l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{none}"
-l12 = f"  {c3}█████{c2}███████{c3}█████{none}  "
+l1  = f"        {c2}█████{DefaultColor}        "
+l2  = f"       {c2}███████{DefaultColor}       "
+l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{DefaultColor}       "
+l4  = f"       {c2}█{c3}█████{c2}█{DefaultColor}       "
+l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{DefaultColor}     "
+l6  = f"    {c2}█{c1}██████████{c2}██{DefaultColor}    "
+l7  = f"   {c2}█{c1}████████████{c2}██{DefaultColor}   "
+l8  = f"   {c2}█{c1}████████████{c2}███{DefaultColor}  "
+l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{DefaultColor}  "
+l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{DefaultColor}"
+l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{DefaultColor}"
+l12 = f"  {c3}█████{c2}███████{c3}█████{DefaultColor}  "
 
 
-print(f"{none}\n                        {User}")
+print(f"{DefaultColor}\n                        {User}")
 print(f"                        ----------------------------------")
 print(f"{l1}\t{OS}")
 print(f"{l2}\t{Shell}")
