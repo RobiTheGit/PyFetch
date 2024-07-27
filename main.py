@@ -2,11 +2,9 @@
 # Neofetch clone made for Debain based Linux, but is known to mostly work on Gentoo
 # If you have a solution to use other distros, fix problems, etc, put a pull request or issue in
 # PyFetch - RobiTheGit/RobiWanKenobi (2024)
-# wmctrl is now required if you want the window manager stuff, but if it isn't installed, the script will still run and not error out
+# wmctrl is now required if you want the window manager stuff, but if it isn't installed, the script will still run and not cause an error
 
-import sys
-import os
-import psutil
+import sys, os, psutil
 '''
 Variable Setup
 '''
@@ -44,6 +42,8 @@ c2 = Grey
 c3 = Bright_Yellow
 TextColor = c3
 line_diff = 0
+IconStr = ''
+CurStr = ''
 HideNameAndSystem = False   # I'd like to make this a command line option at some point
 '''
 Get System Information
@@ -72,7 +72,7 @@ modelstr = (open('/sys/devices/virtual/dmi/id/product_name','r').readline()).rep
 
 vendorstr = (open('/sys/devices/virtual/dmi/id/sys_vendor','r').readline()).replace('\n','')
 if vendorstr == "ASUSTeK COMPUTER INC.":
-    vendorstr = "ASUS (ASUSTeK COMPUTER INC.)"
+    vendorstr = "ASUS/ASUSTeK"
 
 RAMstr = f"{DefaultColor}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
@@ -91,10 +91,13 @@ if Desktopstr == "GNOME" and not Desktopstr == "GNOME-Flashback:GNOME:":
 
 else:
     DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
-    if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME" or os.environ.get("XDG_CURRENT_DESKTOP") == "X-Cinnamon":
+    if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME" or os.environ.get("XDG_CURRENT_DESKTOP") == "X-Cinnamon" or os.environ.get("XDG_CURRENT_DESKTOP") == "LXDE" or os.environ.get("XDG_CURRENT_DESKTOP") == "LXQt":
         CurStr = (os.popen('gtk-query-settings gtk-cursor-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-cursor-theme-name:', '').strip()
     else:
         CurStr = os.environ.get("XCURSOR_THEME")
+
+IconStr = (os.popen('gtk-query-settings gtk-icon-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-icon-theme-name:', '').strip()
+
 Res = f'{Monitor_Width}x{Monitor_Height}'
 '''
 Formatting all of the information into strings that can be used in the output
@@ -115,6 +118,10 @@ Uptime         = f'{TextColor}Uptime:{DefaultColor} \t{DefaultColor} {uptime} Mi
 Desktop        = f'{TextColor}Desktop:{DefaultColor} \t {DefaultColor}{Desktopstr}'
 DispServ       = f"{TextColor}Display Server:{DefaultColor}  {DispServStr}"
 CursorTheme    = f"{TextColor}Cursor Theme:{DefaultColor}    {CurStr}"
+
+if IconStr != '':
+    IconTheme      = f"{TextColor}Icon Theme:{DefaultColor}      {IconStr}"
+
 Resolution     = f"{TextColor}Resolution:{DefaultColor} \t {Res}"
 GPU            = f"{TextColor}GPU:{DefaultColor}\t\t {GPU_Pretty}"
 if WM == "":
@@ -166,6 +173,9 @@ if os.environ.get("XDG_SESSION_TYPE") == 'tty':
     pass
 else:
     print(f"                        {CursorTheme}")
+    if IconStr != '':
+        print(f"                        {IconTheme}")
+   # print(f"                        {CursorTheme}")
 
 print(f"                        {Arch}")
 print(f"\n                        {ColoredBlocks}")
