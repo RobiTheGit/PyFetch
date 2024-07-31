@@ -88,13 +88,14 @@ if Desktopstr == "X-Cinnamon":
         Desktopstr = 'Cinnamon'
 if Desktopstr == "GNOME" and not Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' ').replace('\n', '')
-
 else:
     DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
-    if os.environ.get("XDG_CURRENT_DESKTOP") == "GNOME" or os.environ.get("XDG_CURRENT_DESKTOP") == "X-Cinnamon" or os.environ.get("XDG_CURRENT_DESKTOP") == "LXDE" or os.environ.get("XDG_CURRENT_DESKTOP") == "LXQt":
-        CurStr = (os.popen('gtk-query-settings gtk-cursor-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-cursor-theme-name:', '').strip()
-    else:
-        CurStr = os.environ.get("XCURSOR_THEME")
+
+CurStr = os.environ.get("XCURSOR_THEME")
+
+if CurStr == None:
+    CurStr = (os.popen('gtk-query-settings gtk-cursor-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-cursor-theme-name:', '').strip()
+
 
 IconStr = (os.popen('gtk-query-settings gtk-icon-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-icon-theme-name:', '').strip()
 
