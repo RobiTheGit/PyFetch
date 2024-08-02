@@ -99,6 +99,8 @@ if CurStr == None:
 
 IconStr = (os.popen('gtk-query-settings gtk-icon-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-icon-theme-name:', '').strip()
 
+ThemeStr = (os.popen('gtk-query-settings gtk-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-theme-name:', '').strip()
+
 Res = f'{Monitor_Width}x{Monitor_Height}'
 '''
 Formatting all of the information into strings that can be used in the output
@@ -119,6 +121,8 @@ Uptime         = f'{TextColor}Uptime:{DefaultColor} \t{DefaultColor} {uptime} Mi
 Desktop        = f'{TextColor}Desktop:{DefaultColor} \t {DefaultColor}{Desktopstr}'
 DispServ       = f"{TextColor}Display Server:{DefaultColor}  {DispServStr}"
 CursorTheme    = f"{TextColor}Cursor Theme:{DefaultColor}    {CurStr}"
+if ThemeStr != '':
+    GTKTheme       = f"{TextColor}GTK Theme:{DefaultColor}       {ThemeStr}"
 
 if IconStr != '':
     IconTheme      = f"{TextColor}Icon Theme:{DefaultColor}      {IconStr}"
@@ -176,6 +180,10 @@ else:
     print(f"                        {CursorTheme}")
     if IconStr != '':
         print(f"                        {IconTheme}")
+    if ThemeStr != '':
+        print(f"                        {GTKTheme}")
+
+
    # print(f"                        {CursorTheme}")
 
 print(f"                        {Arch}")
