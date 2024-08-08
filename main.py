@@ -139,7 +139,11 @@ ClrBlk_Lighter = (f'{Grey}███{Bright_Red}███{Bright_Green}███{
 '''
 Print system information
 
-Image res, 21c x 12c; c = characters
+Image res, 22c x 12c; c = characters
+'''
+
+'''
+Tux Penguin Image
 '''
 l1  = f"        {c2}█████{DefaultColor}        "
 l2  = f"       {c2}███████{DefaultColor}       "
