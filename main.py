@@ -4,7 +4,7 @@
 # PyFetch - RobiTheGit/RobiWanKenobi (2024)
 # wmctrl is now required if you want the window manager stuff, but if it isn't installed, the script will still run and not cause an error
 
-import sys, os, psutil
+import os, psutil
 '''
 Variable Setup
 '''
@@ -44,6 +44,7 @@ TextColor = c3
 line_diff = 0
 IconStr = ''
 CurStr = ''
+ThemeStr = ''
 HideNameAndSystem = False   # I'd like to make this a command line option at some point
 '''
 Get System Information
