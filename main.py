@@ -143,6 +143,7 @@ Print system information
 Image res, 22c x 12c; c = characters
 '''
 
+
 '''
 Tux Penguin Image
 '''
@@ -159,27 +160,29 @@ tux_l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}█
 tux_l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{DefaultColor}"
 tux_l12 = f"  {c3}█████{c2}███████{c3}█████{DefaultColor}  "
 
-tux_ = ['Default', tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12]
+IMGS = {
+    0: ['Default', tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12]
+    }
 
 print(f"{DefaultColor}\n                        {User}")
 print(f"                        ----------------------------------")
-print(f"{tux_[1]}\t{OS}")
-print(f"{tux_[2]}\t{Shell}")
-print(f"{tux_[3]}\t{Model}")
-print(f"{tux_[4]}\t{Vendor}")
-print(f"{tux_[5]}\t{CPU}")
-print(f"{tux_[6]}\t{Kernel}")
-print(f"{tux_[7]}\t{RAM}")
-print(f"{tux_[8]}\t{Uptime}")
-print(f"{tux_[9]}\t{Desktop}")
-print(f"{tux_[10]}\t{DispServ}")
+print(f"{IMGS[0][1]}\t{OS}")
+print(f"{IMGS[0][2]}\t{Shell}")
+print(f"{IMGS[0][3]}\t{Model}")
+print(f"{IMGS[0][4]}\t{Vendor}")
+print(f"{IMGS[0][5]}\t{CPU}")
+print(f"{IMGS[0][6]}\t{Kernel}")
+print(f"{IMGS[0][7]}\t{RAM}")
+print(f"{IMGS[0][8]}\t{Uptime}")
+print(f"{IMGS[0][9]}\t{Desktop}")
+print(f"{IMGS[0][10]}\t{DispServ}")
 if WM_Pretty != "":
-    print(f"{tux_[11]}\t{WM_Pretty}")
-    print(f"{tux_[12]}\t{Resolution}")
+    print(f"{IMGS[0][11]}\t{WM_Pretty}")
+    print(f"{IMGS[0][12]}\t{Resolution}")
     print(f"                        {GPU}")
 else:
-    print(f"{tux_[11]}\t{Resolution}")
-    print(f"{tux_[12]}\t{GPU}")
+    print(f"{IMGS[0][11]}\t{Resolution}")
+    print(f"{IMGS[0][12]}\t{GPU}")
 if os.environ.get("XDG_SESSION_TYPE") == 'tty':
     pass
 else:
