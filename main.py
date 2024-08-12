@@ -146,39 +146,40 @@ Image res, 22c x 12c; c = characters
 '''
 Tux Penguin Image
 '''
-l1  = f"        {c2}█████{DefaultColor}        "
-l2  = f"       {c2}███████{DefaultColor}       "
-l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{DefaultColor}       "
-l4  = f"       {c2}█{c3}█████{c2}█{DefaultColor}       "
-l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{DefaultColor}     "
-l6  = f"    {c2}█{c1}██████████{c2}██{DefaultColor}    "
-l7  = f"   {c2}█{c1}████████████{c2}██{DefaultColor}   "
-l8  = f"   {c2}█{c1}████████████{c2}███{DefaultColor}  "
-l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{DefaultColor}  "
-l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{DefaultColor}"
-l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{DefaultColor}"
-l12 = f"  {c3}█████{c2}███████{c3}█████{DefaultColor}  "
+tux_l1  = f"        {c2}█████{DefaultColor}        "
+tux_l2  = f"       {c2}███████{DefaultColor}       "
+tux_l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{DefaultColor}       "
+tux_l4  = f"       {c2}█{c3}█████{c2}█{DefaultColor}       "
+tux_l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{DefaultColor}     "
+tux_l6  = f"    {c2}█{c1}██████████{c2}██{DefaultColor}    "
+tux_l7  = f"   {c2}█{c1}████████████{c2}██{DefaultColor}   "
+tux_l8  = f"   {c2}█{c1}████████████{c2}███{DefaultColor}  "
+tux_l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{DefaultColor}  "
+tux_l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{DefaultColor}"
+tux_l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{DefaultColor}"
+tux_l12 = f"  {c3}█████{c2}███████{c3}█████{DefaultColor}  "
 
+tux_ = ['Default', tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12]
 
 print(f"{DefaultColor}\n                        {User}")
 print(f"                        ----------------------------------")
-print(f"{l1}\t{OS}")
-print(f"{l2}\t{Shell}")
-print(f"{l3}\t{Model}")
-print(f"{l4}\t{Vendor}")
-print(f"{l5}\t{CPU}")
-print(f"{l6}\t{Kernel}")
-print(f"{l7}\t{RAM}")
-print(f"{l8}\t{Uptime}")
-print(f"{l9}\t{Desktop}")
-print(f"{l10}\t{DispServ}")
+print(f"{tux_[1]}\t{OS}")
+print(f"{tux_[2]}\t{Shell}")
+print(f"{tux_[3]}\t{Model}")
+print(f"{tux_[4]}\t{Vendor}")
+print(f"{tux_[5]}\t{CPU}")
+print(f"{tux_[6]}\t{Kernel}")
+print(f"{tux_[7]}\t{RAM}")
+print(f"{tux_[8]}\t{Uptime}")
+print(f"{tux_[9]}\t{Desktop}")
+print(f"{tux_[10]}\t{DispServ}")
 if WM_Pretty != "":
-    print(f"{l11}\t{WM_Pretty}")
-    print(f"{l12}\t{Resolution}")
+    print(f"{tux_[11]}\t{WM_Pretty}")
+    print(f"{tux_[12]}\t{Resolution}")
     print(f"                        {GPU}")
 else:
-    print(f"{l11}\t{Resolution}")
-    print(f"{l12}\t{GPU}")
+    print(f"{tux_[11]}\t{Resolution}")
+    print(f"{tux_[12]}\t{GPU}")
 if os.environ.get("XDG_SESSION_TYPE") == 'tty':
     pass
 else:
@@ -187,9 +188,6 @@ else:
         print(f"                        {IconTheme}")
     if ThemeStr != '':
         print(f"                        {GTKTheme}")
-
-
-   # print(f"                        {CursorTheme}")
 
 print(f"                        {Arch}")
 print(f"\n                        {ColoredBlocks}")
