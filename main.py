@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 # Neofetch clone made for Debain based Linux, but is known to mostly work on Gentoo
+#
 # If you have a solution to use other distros, fix problems, etc, put a pull request or issue in
+#
 # PyFetch - RobiTheGit/RobiWanKenobi (2024)
+#
 # wmctrl is now required if you want the window manager stuff, but if it isn't installed, the script will still run and not cause an error
 
 import os, psutil
@@ -46,13 +49,28 @@ IconStr = ''
 CurStr = ''
 ThemeStr = ''
 HideNameAndSystem = False   # I'd like to make this a command line option at some point
+
+
 '''
 Get System Information
 '''
+
+'''
+GPU & CPU
+'''
 GPU_Pretty = ((((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[0]).split(' ', 1)[1] + (((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(':',2)[2]).split('[',2)[1]).replace(']', '')).replace(" Corporation ",' ')
+
+CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).replace('\n', '')).split(' ', 1))[1]
+
+'''
+Distro & Uptime
+'''
 OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
 uptime = str(round((float((open('/proc/uptime', 'r').readline().split(' '))[0]) / 60),0)).replace('.0','')
-CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).replace('\n', '')).split(' ', 1))[1]
+
+'''
+Monitor
+'''
 try:
     x = 0
     if os.environ.get("XDG_CURRENT_DESKTOP") == "MATE":
@@ -64,18 +82,34 @@ except: #This was added since monitor resolution code didn't work on Gentoo
     Monitor_Width = 'UNKNOWN'
     Monitor_Height= 'UNKNOWN'
 
+Res = f'{Monitor_Width}x{Monitor_Height}'
+
+'''
+RAM & Shell
+'''
+
 mem = psutil.virtual_memory()
+RAMstr = f"{DefaultColor}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
+
 shellstr = str(os.environ.get("SHELL")).replace('/bin/','').title()
 if shellstr == "Bash":
     BashVer = os.popen("bash --version | head -1 | tr ' ' '\n' | grep 'version' -A1 | grep -v 'version'").readline().replace('\n','')
     shellstr = f"Bash {BashVer}"
+
+'''
+Hardware
+'''
+
 modelstr = (open('/sys/devices/virtual/dmi/id/product_name','r').readline()).replace('\n','')
 
 vendorstr = (open('/sys/devices/virtual/dmi/id/sys_vendor','r').readline()).replace('\n','')
 if vendorstr == "ASUSTeK COMPUTER INC.":
     vendorstr = "ASUS/ASUSTeK"
 
-RAMstr = f"{DefaultColor}{round((int(mem.active) / 1.074e+9),2)} GB / {round((int(mem.total) / 1.074e+9),2)} GB"
+'''
+Desktop, Windowing System, & Window Manager
+'''
+
 Desktopstr = os.environ.get("XDG_CURRENT_DESKTOP")
 if os.environ.get("XDG_SESSION_TYPE") == 'tty':
     Desktopstr = "Tty"
@@ -92,6 +126,9 @@ if Desktopstr == "GNOME" and not Desktopstr == "GNOME-Flashback:GNOME:":
 else:
     DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
 
+'''
+Themes
+'''
 CurStr = os.environ.get("XCURSOR_THEME")
 
 if CurStr == None:
@@ -102,7 +139,6 @@ IconStr = (os.popen('gtk-query-settings gtk-icon-theme-name')).read().replace('"
 
 ThemeStr = (os.popen('gtk-query-settings gtk-theme-name')).read().replace('"', '').replace('\n', '').replace('gtk-theme-name:', '').strip()
 
-Res = f'{Monitor_Width}x{Monitor_Height}'
 '''
 Formatting all of the information into strings that can be used in the output
 '''
@@ -160,29 +196,52 @@ tux_l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}█
 tux_l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{DefaultColor}"
 tux_l12 = f"  {c3}█████{c2}███████{c3}█████{DefaultColor}  "
 
+'''
+TEST IMAGE
+'''
+t1  = f'{c1}██████████████████████'
+t2  = f'{c2}██████████████████████'
+t3  = f'{c3}██████████████████████'
+t4  = f'{c1}██████████████████████'
+t5  = f'{c2}██████████████████████'
+t6  = f'{c3}██████████████████████'
+t7  = f'{c1}██████████████████████'
+t8  = f'{c2}██████████████████████'
+t9  = f'{c3}██████████████████████'
+t10 = f'{c1}██████████████████████'
+t11 = f'{c2}██████████████████████'
+t12 = f'{c3}██████████████████████'
+
+img = 1
+# Format:
+# Header (this isn't important, it is just to take slot 0)
+# Line 1
+# ...
+# Line 12
 IMGS = {
-    0: ['Default', tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12]
+    0: ['test', t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12],
+    1: ['Default', tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12]
     }
 
 print(f"{DefaultColor}\n                        {User}")
 print(f"                        ----------------------------------")
-print(f"{IMGS[0][1]}\t{OS}")
-print(f"{IMGS[0][2]}\t{Shell}")
-print(f"{IMGS[0][3]}\t{Model}")
-print(f"{IMGS[0][4]}\t{Vendor}")
-print(f"{IMGS[0][5]}\t{CPU}")
-print(f"{IMGS[0][6]}\t{Kernel}")
-print(f"{IMGS[0][7]}\t{RAM}")
-print(f"{IMGS[0][8]}\t{Uptime}")
-print(f"{IMGS[0][9]}\t{Desktop}")
-print(f"{IMGS[0][10]}\t{DispServ}")
+print(f"{IMGS[img][1]}\t{OS}")
+print(f"{IMGS[img][2]}\t{Shell}")
+print(f"{IMGS[img][3]}\t{Model}")
+print(f"{IMGS[img][4]}\t{Vendor}")
+print(f"{IMGS[img][5]}\t{CPU}")
+print(f"{IMGS[img][6]}\t{Kernel}")
+print(f"{IMGS[img][7]}\t{RAM}")
+print(f"{IMGS[img][8]}\t{Uptime}")
+print(f"{IMGS[img][9]}\t{Desktop}")
+print(f"{IMGS[img][10]}\t{DispServ}")
 if WM_Pretty != "":
-    print(f"{IMGS[0][11]}\t{WM_Pretty}")
-    print(f"{IMGS[0][12]}\t{Resolution}")
+    print(f"{IMGS[img][11]}\t{WM_Pretty}")
+    print(f"{IMGS[img][12]}\t{Resolution}")
     print(f"                        {GPU}")
 else:
-    print(f"{IMGS[0][11]}\t{Resolution}")
-    print(f"{IMGS[0][12]}\t{GPU}")
+    print(f"{IMGS[img][11]}\t{Resolution}")
+    print(f"{IMGS[img][12]}\t{GPU}")
 if os.environ.get("XDG_SESSION_TYPE") == 'tty':
     pass
 else:
