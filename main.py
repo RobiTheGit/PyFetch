@@ -40,16 +40,110 @@ Red_Background = f'\033[1;31;41m'
 Black_Background = f'\033[1;30;40m'
 
 WM = ''
-c1 = White
-c2 = Grey
-c3 = Bright_Yellow
-TextColor = c3
+
 line_diff = 0
 IconStr = ''
 CurStr = ''
 ThemeStr = ''
 HideNameAndSystem = False   # I'd like to make this a command line option at some point
+'''
+Distro
+'''
+OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
 
+if OS_Release.startswith("Debian"):
+    img = 2
+elif OS_Release.startswith("Arch"):
+    img = 3
+else:
+    img = 1
+'''
+Image res, 22c x 12c; c = characters
+'''
+
+
+if img == 1: #  Tux
+    c1 = White
+    c2 = Grey
+    c3 = Bright_Yellow
+elif img == 2:
+    c1 = Red
+    c2 = Red
+    c3 = Bright_Red
+elif img == 3:
+    c1 = Cyan
+    c2 = Blue
+    c3 = Cyan
+else:
+    c1 = White
+    c2 = White
+    c3 = White
+
+TextColor = c3
+'''
+Tux Penguin Image
+'''
+tux_l1  = f"        {c2}█████{DefaultColor}        "
+tux_l2  = f"       {c2}███████{DefaultColor}       "
+tux_l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{DefaultColor}       "
+tux_l4  = f"       {c2}█{c3}█████{c2}█{DefaultColor}       "
+tux_l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{DefaultColor}     "
+tux_l6  = f"    {c2}█{c1}██████████{c2}██{DefaultColor}    "
+tux_l7  = f"   {c2}█{c1}████████████{c2}██{DefaultColor}   "
+tux_l8  = f"   {c2}█{c1}████████████{c2}███{DefaultColor}  "
+tux_l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{DefaultColor}  "
+tux_l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{DefaultColor}"
+tux_l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{DefaultColor}"
+tux_l12 = f"  {c3}█████{c2}███████{c3}█████{DefaultColor}  "
+
+'''
+TEST IMAGE
+'''
+t1  = f'{c1}██████████████████████{DefaultColor}'
+t2  = f'{c2}██████████████████████{DefaultColor}'
+t3  = f'{c3}██████████████████████{DefaultColor}'
+t4  = f'{c1}██████████████████████{DefaultColor}'
+t5  = f'{c2}██████████████████████{DefaultColor}'
+t6  = f'{c3}██████████████████████{DefaultColor}'
+t7  = f'{c1}██████████████████████{DefaultColor}'
+t8  = f'{c2}██████████████████████{DefaultColor}'
+t9  = f'{c3}██████████████████████{DefaultColor}'
+t10 = f'{c1}██████████████████████{DefaultColor}'
+t11 = f'{c2}██████████████████████{DefaultColor}'
+t12 = f'{c3}██████████████████████{DefaultColor}'
+
+blank = '                      '
+
+'''
+Debian Image
+'''
+deb1 = f'      {c3} _____{DefaultColor}          '
+deb2 = f'      {c3}/  __ \\\{DefaultColor}        '
+deb3 = f'      {c3}|  /    |{DefaultColor}       '
+deb4 = f'      {c3}|  \\\___-{DefaultColor}       '
+deb5 = f'      {c3}-_{DefaultColor}              '
+deb6 = f'      {c3}  --_{DefaultColor}           '
+
+arch1 = f'      {c1}/\\\{DefaultColor}           '
+arch2 = f'     {c1}/  \\\{DefaultColor}          '
+arch3 = f'    {c1}/\\\   \\\{DefaultColor}       '
+arch4 = f'   {c1}/      \\\{DefaultColor}        '
+arch5 = f'  {c2}/   ,,   \\\{DefaultColor}       '
+arch6 = f' {c2}/   |  |  -\\\{DefaultColor}      '
+arch7 = f"{c2}/_-''    ''-_\\\{DefaultColor}     "
+
+
+# Format:
+# Header (this isn't important, it is just to take slot 0)
+# Line 1
+# ...  (the other lines)
+# Line 12
+IMGS = {
+    0: ['test', t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12],
+    1: ['Not known', tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12],
+    2: ['Debian', blank, blank, blank, deb1, deb2, deb3, deb4, deb5, deb6, blank, blank, blank],
+    3: ['Arch', blank, blank, arch1, arch2, arch3, arch4, arch5, arch6, arch7, blank, blank, blank]
+    }
 
 '''
 Get System Information
@@ -63,9 +157,8 @@ GPU_Pretty = ((((os.popen('lspci -nn | grep -E "Display|3D|VGA"').read()).split(
 CPU_Model_Name = ((((open('/proc/cpuinfo', 'r').readlines()[4].split(':'))[1]).replace('\n', '')).split(' ', 1))[1]
 
 '''
-Distro & Uptime
+Uptime
 '''
-OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
 uptime = str(round((float((open('/proc/uptime', 'r').readline().split(' '))[0]) / 60),0)).replace('.0','')
 
 '''
@@ -175,53 +268,8 @@ ColoredBlocks  = (f'{Black}███{Red}███{Green}███{Yellow}██
 ClrBlk_Lighter = (f'{Grey}███{Bright_Red}███{Bright_Green}███{Bright_Yellow}███{Bright_Blue}███{Magenta}███{Bright_Cyan}███{White}███{DefaultColor}')
 '''
 Print system information
-
-Image res, 22c x 12c; c = characters
 '''
 
-
-'''
-Tux Penguin Image
-'''
-tux_l1  = f"        {c2}█████{DefaultColor}        "
-tux_l2  = f"       {c2}███████{DefaultColor}       "
-tux_l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{DefaultColor}       "
-tux_l4  = f"       {c2}█{c3}█████{c2}█{DefaultColor}       "
-tux_l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{DefaultColor}     "
-tux_l6  = f"    {c2}█{c1}██████████{c2}██{DefaultColor}    "
-tux_l7  = f"   {c2}█{c1}████████████{c2}██{DefaultColor}   "
-tux_l8  = f"   {c2}█{c1}████████████{c2}███{DefaultColor}  "
-tux_l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{DefaultColor}  "
-tux_l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{DefaultColor}"
-tux_l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{DefaultColor}"
-tux_l12 = f"  {c3}█████{c2}███████{c3}█████{DefaultColor}  "
-
-'''
-TEST IMAGE
-'''
-t1  = f'{c1}██████████████████████'
-t2  = f'{c2}██████████████████████'
-t3  = f'{c3}██████████████████████'
-t4  = f'{c1}██████████████████████'
-t5  = f'{c2}██████████████████████'
-t6  = f'{c3}██████████████████████'
-t7  = f'{c1}██████████████████████'
-t8  = f'{c2}██████████████████████'
-t9  = f'{c3}██████████████████████'
-t10 = f'{c1}██████████████████████'
-t11 = f'{c2}██████████████████████'
-t12 = f'{c3}██████████████████████'
-
-img = 1
-# Format:
-# Header (this isn't important, it is just to take slot 0)
-# Line 1
-# ...
-# Line 12
-IMGS = {
-    0: ['test', t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12],
-    1: ['Default', tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12]
-    }
 
 print(f"{DefaultColor}\n                        {User}")
 print(f"                        ----------------------------------")
