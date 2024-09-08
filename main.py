@@ -6,6 +6,8 @@
 # PyFetch - RobiTheGit/RobiWanKenobi (2024)
 #
 # wmctrl is now required if you want the window manager stuff, but if it isn't installed, the script will still run and not cause an error
+#
+# For ASCII Images, keep them 22 Characters by 12 Characters
 
 import os, psutil
 '''
@@ -40,7 +42,7 @@ Red_Background = f'\033[1;31;41m'
 Black_Background = f'\033[1;30;40m'
 
 WM = ''
-
+img = 0
 line_diff = 0
 IconStr = ''
 CurStr = ''
@@ -50,15 +52,17 @@ HideNameAndSystem = False   # I'd like to make this a command line option at som
 Distro
 '''
 OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
-
-if OS_Release.startswith("Debian"):
-    img = 2
-elif OS_Release.startswith("Arch"):
-    img = 3
-else:
-    img = 1
+try:
+    if OS_Release.startswith("Debian"):
+        img = 2
+    elif OS_Release.startswith("Arch"):
+        img = 3
+    else:
+        img = 1
+except:
+    img = 0
 '''
-Image res, 22c x 12c; c = characters
+Image res, 26c x 12c; c = characters
 '''
 
 
@@ -68,7 +72,7 @@ if img == 1: #  Tux
     c3 = Bright_Yellow
 elif img == 2:
     c1 = Red
-    c2 = Red
+    c2 = c1
     c3 = Bright_Red
 elif img == 3:
     c1 = Cyan
@@ -76,73 +80,82 @@ elif img == 3:
     c3 = Cyan
 else:
     c1 = White
-    c2 = White
-    c3 = White
+    c2 = c1
+    c3 = c1
 
 TextColor = c3
 '''
 Tux Penguin Image
 '''
-tux_l1  = f"        {c2}█████{DefaultColor}        "
-tux_l2  = f"       {c2}███████{DefaultColor}       "
-tux_l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{DefaultColor}       "
-tux_l4  = f"       {c2}█{c3}█████{c2}█{DefaultColor}       "
-tux_l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{DefaultColor}     "
-tux_l6  = f"    {c2}█{c1}██████████{c2}██{DefaultColor}    "
-tux_l7  = f"   {c2}█{c1}████████████{c2}██{DefaultColor}   "
-tux_l8  = f"   {c2}█{c1}████████████{c2}███{DefaultColor}  "
-tux_l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{DefaultColor}  "
-tux_l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{DefaultColor}"
-tux_l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{DefaultColor}"
-tux_l12 = f"  {c3}█████{c2}███████{c3}█████{DefaultColor}  "
+tux_l1  = f"        {c2}█████{DefaultColor}            "
+tux_l2  = f"       {c2}███████{DefaultColor}           "
+tux_l3  = f"       {c2}██{c1}█{c2}█{c1}█{c2}██{DefaultColor}           "
+tux_l4  = f"       {c2}█{c3}█████{c2}█{DefaultColor}           "
+tux_l5  = f"     {c2}██{c1}██{c3}███{c1}██{c2}██{DefaultColor}         "
+tux_l6  = f"    {c2}█{c1}██████████{c2}██{DefaultColor}        "
+tux_l7  = f"   {c2}█{c1}████████████{c2}██{DefaultColor}       "
+tux_l8  = f"   {c2}█{c1}████████████{c2}███{DefaultColor}      "
+tux_l9  = f"  {c3}██{c2}█{c1}███████████{c2}██{c3}█{DefaultColor}      "
+tux_l10 = f"{c3}██████{c2}█{c1}███████{c2}█{c3}██████{DefaultColor}    "
+tux_l11 = f"{c3}███████{c2}█{c1}█████{c2}█{c3}███████{DefaultColor}    "
+tux_l12 = f"  {c3}█████{c2}███████{c3}█████{DefaultColor}      "
 
 '''
 TEST IMAGE
 '''
-t1  = f'{c1}██████████████████████{DefaultColor}'
-t2  = f'{c2}██████████████████████{DefaultColor}'
-t3  = f'{c3}██████████████████████{DefaultColor}'
-t4  = f'{c1}██████████████████████{DefaultColor}'
-t5  = f'{c2}██████████████████████{DefaultColor}'
-t6  = f'{c3}██████████████████████{DefaultColor}'
-t7  = f'{c1}██████████████████████{DefaultColor}'
-t8  = f'{c2}██████████████████████{DefaultColor}'
-t9  = f'{c3}██████████████████████{DefaultColor}'
-t10 = f'{c1}██████████████████████{DefaultColor}'
-t11 = f'{c2}██████████████████████{DefaultColor}'
-t12 = f'{c3}██████████████████████{DefaultColor}'
-
-blank = '                      '
+t1  = f'{c1}██████████████████████████{DefaultColor}'
+t2  = f'{c2}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████{DefaultColor}'
+t3  = f'{c3}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████{DefaultColor}'
+t4  = f'{c1}░░░░░░░░░░░░░░░░░░░░░░████{DefaultColor}'
+t5  = f'{c2}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████{DefaultColor}'
+t6  = f'{c3}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████{DefaultColor}'
+t7  = f'{c1}██████████████████████████{DefaultColor}'
+t8  = f'{c2}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████{DefaultColor}'
+t9  = f'{c3}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████{DefaultColor}'
+t10 = f'{c1}░░░░░░░░░░░░░░░░░░░░░░████{DefaultColor}'
+t11 = f'{c2}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████{DefaultColor}'
+t12 = f'{c3}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████{DefaultColor}'
 
 '''
 Debian Image
 '''
-deb1 = f'      {c3} _____{DefaultColor}          '
-deb2 = f'      {c3}/  __ \\\{DefaultColor}        '
-deb3 = f'      {c3}|  /    |{DefaultColor}       '
-deb4 = f'      {c3}|  \\\___-{DefaultColor}       '
-deb5 = f'      {c3}-_{DefaultColor}              '
-deb6 = f'      {c3}  --_{DefaultColor}           '
+deb1  = f"      {c1}_,###._{DefaultColor}       "
+deb2  = f"    {c1},#########.{DefaultColor}     "
+deb3  = f"  {c1}.######^######.{DefaultColor}   "
+deb4  = f"{c1}.####'     `####{DefaultColor}    "
+deb5  = f" {c1}####' ,###. `###:{DefaultColor}  "
+deb6  = f" {c1}###'  ##'`# ,###{DefaultColor}   "
+deb7  = f" {c1}###.  ###._,###'{DefaultColor}   "
+deb8  = f" {c1}`###  `######'{DefaultColor}     "
+deb9  = f"  {c1}`###    `''{DefaultColor}       "
+deb10 = f"   {c1}`###.{DefaultColor}            "
+deb11 = f"     {c1}`###,{DefaultColor}          "
+deb12 = f"       {c1}`'##:.{DefaultColor}       "
 
-arch1 = f'      {c1}/\\\{DefaultColor}           '
-arch2 = f'     {c1}/  \\\{DefaultColor}          '
-arch3 = f'    {c1}/\\\   \\\{DefaultColor}       '
-arch4 = f'   {c1}/      \\\{DefaultColor}        '
-arch5 = f'  {c2}/   ,,   \\\{DefaultColor}       '
-arch6 = f' {c2}/   |  |  -\\\{DefaultColor}      '
-arch7 = f"{c2}/_-''    ''-_\\\{DefaultColor}     "
+'''
+the "i use arch btw" image
+'''
+AB1   =  '                '
+arch1 = f'      {c1}/\\\{DefaultColor}       '
+arch2 = f'     {c1}/  \\\{DefaultColor}      '
+arch3 = f'    {c1}/\\\   \\\{DefaultColor}    '
+arch4 = f'   {c1}/      \\\{DefaultColor}    '
+arch5 = f'  {c2}/   ,,   \\\{DefaultColor}   '
+arch6 = f' {c2}/   |  |  -\\\{DefaultColor}  '
+arch7 = f"{c2}/_-''    ''-_\\\{DefaultColor} "
 
 
 # Format:
-# Header (this isn't important, it is just to take slot 0)
+# Line length -1 (for blank setting)
 # Line 1
 # ...  (the other lines)
 # Line 12
+blank = ' '
 IMGS = {
-    0: ['test', t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12],
-    1: ['Not known', tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12],
-    2: ['Debian', blank, blank, blank, deb1, deb2, deb3, deb4, deb5, deb6, blank, blank, blank],
-    3: ['Arch', blank, blank, arch1, arch2, arch3, arch4, arch5, arch6, arch7, blank, blank, blank]
+    0: [26, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12],
+    1: [25, tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12],
+    2: [20, deb1, deb2, deb3, deb4, deb5, deb6, deb7, deb8, deb9, deb10, deb11, deb12],
+    3: [16, arch1, arch2, arch3, arch4, arch5, arch6, arch7, AB1, AB1, AB1, AB1, AB1]
     }
 
 '''
@@ -238,7 +251,7 @@ Formatting all of the information into strings that can be used in the output
 if HideNameAndSystem == False:
     User    = f'{TextColor}{os.getlogin()}{DefaultColor}@{TextColor}{os.uname().nodename}{DefaultColor}'    #   This is actually grabbing the username and system name, all from raw python
 else:
-    User    = f'{TextColor}user{DefaultColor}@{TextColor}linux{DefaultColor}'   #   This Code just prevents the actual username of the system, and the system name from being shown. This is used mostly for the readme
+    User    = f'{TextColor}user{DefaultColor}@{TextColor}linux{DefaultColor}'   #   This just puts a placeholder user and system name in, this is what I use in the screenshots
 
 OS             = f'{TextColor}OS:\t\t{DefaultColor} {OS_Release} {os.uname().machine}'
 Shell          = f'{TextColor}Terminal Shell:\t{DefaultColor} {shellstr}'
@@ -270,36 +283,37 @@ ClrBlk_Lighter = (f'{Grey}███{Bright_Red}███{Bright_Green}███{
 Print system information
 '''
 
+blank *= IMGS[img][0]
 
-print(f"{DefaultColor}\n                        {User}")
-print(f"                        ----------------------------------")
-print(f"{IMGS[img][1]}\t{OS}")
-print(f"{IMGS[img][2]}\t{Shell}")
-print(f"{IMGS[img][3]}\t{Model}")
-print(f"{IMGS[img][4]}\t{Vendor}")
-print(f"{IMGS[img][5]}\t{CPU}")
-print(f"{IMGS[img][6]}\t{Kernel}")
-print(f"{IMGS[img][7]}\t{RAM}")
-print(f"{IMGS[img][8]}\t{Uptime}")
-print(f"{IMGS[img][9]}\t{Desktop}")
-print(f"{IMGS[img][10]}\t{DispServ}")
+print(f"{DefaultColor}\n{blank}{User}")
+print(f"{blank}----------------------------------")
+print(f"{IMGS[img][1]}{OS}")
+print(f"{IMGS[img][2]}{Shell}")
+print(f"{IMGS[img][3]}{Model}")
+print(f"{IMGS[img][4]}{Vendor}")
+print(f"{IMGS[img][5]}{CPU}")
+print(f"{IMGS[img][6]}{Kernel}")
+print(f"{IMGS[img][7]}{RAM}")
+print(f"{IMGS[img][8]}{Uptime}")
+print(f"{IMGS[img][9]}{Desktop}")
+print(f"{IMGS[img][10]}{DispServ}")
 if WM_Pretty != "":
-    print(f"{IMGS[img][11]}\t{WM_Pretty}")
-    print(f"{IMGS[img][12]}\t{Resolution}")
-    print(f"                        {GPU}")
+    print(f"{IMGS[img][11]}{WM_Pretty}")
+    print(f"{IMGS[img][12]}{Resolution}")
+    print(f"{blank}{GPU}")
 else:
-    print(f"{IMGS[img][11]}\t{Resolution}")
-    print(f"{IMGS[img][12]}\t{GPU}")
+    print(f"{IMGS[img][11]}{Resolution}")
+    print(f"{IMGS[img][12]}{GPU}")
 if os.environ.get("XDG_SESSION_TYPE") == 'tty':
     pass
 else:
-    print(f"                        {CursorTheme}")
+    print(f"{blank}{CursorTheme}")
     if IconStr != '':
-        print(f"                        {IconTheme}")
+        print(f"{blank}{IconTheme}")
     if ThemeStr != '':
-        print(f"                        {GTKTheme}")
+        print(f"{blank}{GTKTheme}")
 
-print(f"                        {Arch}")
-print(f"\n                        {ColoredBlocks}")
-print(f"                        {ClrBlk_Lighter}")
+print(f"{blank}{Arch}")
+print(f"\n{blank}{ColoredBlocks}")
+print(f"{blank}{ClrBlk_Lighter}")
 
