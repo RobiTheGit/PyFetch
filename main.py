@@ -103,18 +103,18 @@ tux_l12 = f"  {c3}█████{c2}███████{c3}█████{De
 '''
 TEST IMAGE
 '''
-t1  = f'{c1}██████████████████████████{DefaultColor}'
-t2  = f'{c2}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████{DefaultColor}'
-t3  = f'{c3}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████{DefaultColor}'
-t4  = f'{c1}░░░░░░░░░░░░░░░░░░░░░░████{DefaultColor}'
-t5  = f'{c2}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████{DefaultColor}'
-t6  = f'{c3}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████{DefaultColor}'
-t7  = f'{c1}██████████████████████████{DefaultColor}'
-t8  = f'{c2}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████{DefaultColor}'
-t9  = f'{c3}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████{DefaultColor}'
-t10 = f'{c1}░░░░░░░░░░░░░░░░░░░░░░████{DefaultColor}'
-t11 = f'{c2}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████{DefaultColor}'
-t12 = f'{c3}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████{DefaultColor}'
+t1  = f'{c1}█████████████████████████ {DefaultColor}'
+t2  = f'{c2}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
+t3  = f'{c3}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ {DefaultColor}'
+t4  = f'{c1}░░░░░░░░░░░░░░░░░░░░░░░░░ {DefaultColor}'
+t5  = f'{c2}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ {DefaultColor}'
+t6  = f'{c3}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
+t7  = f'{c1}█████████████████████████ {DefaultColor}'
+t8  = f'{c2}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
+t9  = f'{c3}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ {DefaultColor}'
+t10 = f'{c1}░░░░░░░░░░░░░░░░░░░░░░░░░ {DefaultColor}'
+t11 = f'{c2}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ {DefaultColor}'
+t12 = f'{c3}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
 
 '''
 Debian Image
@@ -178,11 +178,10 @@ uptime = str(round((float((open('/proc/uptime', 'r').readline().split(' '))[0]) 
 Monitor
 '''
 try:
-    x = 0
-    if os.environ.get("XDG_CURRENT_DESKTOP") == "MATE":
-        x = line_diff # Change depending on how monitors.xml is set up
-    Monitor_Width = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[18-x]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('width', ''))
-    Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[19-x]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('height', ''))
+
+    # Change line_diff depending on how monitors.xml is set up
+    Monitor_Width = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[18-line_diff]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('width', ''))
+    Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[19-line_diff]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('height', ''))
 
 except: #This was added since monitor resolution code didn't work on Gentoo
     Monitor_Width = 'UNKNOWN'
@@ -253,30 +252,30 @@ if HideNameAndSystem == False:
 else:
     User    = f'{TextColor}user{DefaultColor}@{TextColor}linux{DefaultColor}'   #   This just puts a placeholder user and system name in, this is what I use in the screenshots
 
-OS             = f'{TextColor}OS:\t\t{DefaultColor} {OS_Release} {os.uname().machine}'
-Shell          = f'{TextColor}Terminal Shell:\t{DefaultColor} {shellstr}'
-Model          = f'{TextColor}Model:\t\t{DefaultColor} {modelstr}'
-Vendor         = f'{TextColor}Vendor:\t\t{DefaultColor} {vendorstr} '
-CPU            = f'{TextColor}CPU:{DefaultColor} \t\t{DefaultColor} {CPU_Model_Name}({os.cpu_count()})'
-Kernel         = f'{TextColor}Kernel:{DefaultColor} \t{DefaultColor} {os.uname().release}'
-RAM            = f'{TextColor}Memory (RAM):{DefaultColor} \t {RAMstr} {DefaultColor}'
-Uptime         = f'{TextColor}Uptime:{DefaultColor} \t{DefaultColor} {uptime} Minutes'
-Desktop        = f'{TextColor}Desktop:{DefaultColor} \t {DefaultColor}{Desktopstr}'
-DispServ       = f"{TextColor}Display Server:{DefaultColor}  {DispServStr}"
-CursorTheme    = f"{TextColor}Cursor Theme:{DefaultColor}    {CurStr}"
+OS             = f'{TextColor}OS:{DefaultColor} {OS_Release} {os.uname().machine}'
+Shell          = f'{TextColor}Terminal Shell: {DefaultColor}{shellstr}'
+Model          = f'{TextColor}Model: {DefaultColor}{modelstr}'
+Vendor         = f'{TextColor}Vendor: {DefaultColor}{vendorstr} '
+CPU            = f'{TextColor}CPU: {DefaultColor}{DefaultColor}{CPU_Model_Name}({os.cpu_count()})'
+Kernel         = f'{TextColor}Kernel: {DefaultColor}{DefaultColor}{os.uname().release}'
+RAM            = f'{TextColor}Memory (RAM): {DefaultColor}{RAMstr}{DefaultColor}'
+Uptime         = f'{TextColor}Uptime: {DefaultColor}{DefaultColor}{uptime} Minutes'
+Desktop        = f'{TextColor}Desktop: {DefaultColor}{DefaultColor}{Desktopstr}'
+DispServ       = f"{TextColor}Display Server: {DefaultColor}{DispServStr}"
+CursorTheme    = f"{TextColor}Cursor Theme:{DefaultColor}{CurStr}"
 if ThemeStr != '':
-    GTKTheme       = f"{TextColor}GTK Theme:{DefaultColor}       {ThemeStr}"
+    GTKTheme       = f"{TextColor}GTK Theme: {DefaultColor}{ThemeStr}"
 
 if IconStr != '':
-    IconTheme      = f"{TextColor}Icon Theme:{DefaultColor}      {IconStr}"
+    IconTheme      = f"{TextColor}Icon Theme: {DefaultColor}{IconStr}"
 
-Resolution     = f"{TextColor}Resolution:{DefaultColor} \t {Res}"
-GPU            = f"{TextColor}GPU:{DefaultColor}\t\t {GPU_Pretty}"
+Resolution     = f"{TextColor}Resolution: {DefaultColor}{Res}"
+GPU            = f"{TextColor}GPU: {DefaultColor}{GPU_Pretty}"
 if WM == "":
     WM_Pretty  = ""
 else:
-    WM_Pretty  = f"{TextColor}Window Manager:{DefaultColor}\t {WM}"
-Arch           = f"{TextColor}CPU Type:{DefaultColor}\t {(os.popen('arch')).read()}"
+    WM_Pretty  = f"{TextColor}Window Manager: {DefaultColor}{WM}"
+Arch           = f"{TextColor}CPU Type: {DefaultColor}{(os.popen('arch')).read()}"
 ColoredBlocks  = (f'{Black}███{Red}███{Green}███{Yellow}███{Blue}███{Purple}███{Cyan}███{Bright_Grey}███{DefaultColor}')
 ClrBlk_Lighter = (f'{Grey}███{Bright_Red}███{Bright_Green}███{Bright_Yellow}███{Bright_Blue}███{Magenta}███{Bright_Cyan}███{White}███{DefaultColor}')
 '''
