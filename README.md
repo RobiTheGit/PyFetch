@@ -1,12 +1,10 @@
 # PyFetch
 Like neofetch, but in python (WIP) For Linux (Tested on Debian 12)
 
-![latest-screenshot](https://github.com/user-attachments/assets/d2be9293-2e49-4fef-a55d-4f3a76ac1f5d)
+![latest-screenshot](https://github.com/user-attachments/assets/d075420c-b1e0-44d7-9497-be42cc0b00ef)
 
 
 TODO:
-
-Fix a text alignment bug
 
 Whatever comes to mind
 
