@@ -42,39 +42,39 @@ Red_Background = f'\033[1;31;41m'
 Black_Background = f'\033[1;30;40m'
 
 WM = ''
-img = 0
+img = ''
 line_diff = 0
 IconStr = ''
 CurStr = ''
 ThemeStr = ''
-HideNameAndSystem = False   # I'd like to make this a command line option at some point
+HideNameAndSystem = True   # I'd like to make this a command line option at some point
 '''
 Distro
 '''
 OS_Release = ((open('/etc/os-release', 'r').readline().split('=')[1]).replace('"', '')).replace('\n', '')
 try:
     if OS_Release.startswith("Debian"):
-        img = 2
+        img = 'deb'
     elif OS_Release.startswith("Arch"):
-        img = 3
+        img = 'arch'
     else:
-        img = 1
+        img = 'generic'
 except:
-    img = 0
+    img = 'test'
 '''
 Image res, 26c x 12c; c = characters
 '''
 
 
-if img == 1: #  Tux
+if img == 'generic': #  Tux
     c1 = White
     c2 = Grey
     c3 = Bright_Yellow
-elif img == 2:
+elif img == 'deb':
     c1 = Red
     c2 = c1
     c3 = Bright_Red
-elif img == 3:
+elif img == 'arch':
     c1 = Cyan
     c2 = Blue
     c3 = Cyan
@@ -103,18 +103,18 @@ tux_l12 = f"  {c3}█████{c2}███████{c3}█████{De
 '''
 TEST IMAGE
 '''
-t1  = f'{c1}█████████████████████████ {DefaultColor}'
+t1  = f'{c1}                          {DefaultColor}'
 t2  = f'{c2}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
-t3  = f'{c3}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ {DefaultColor}'
-t4  = f'{c1}░░░░░░░░░░░░░░░░░░░░░░░░░ {DefaultColor}'
+t3  = f'{c3}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
+t4  = f'{c1}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ {DefaultColor}'
 t5  = f'{c2}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ {DefaultColor}'
-t6  = f'{c3}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
-t7  = f'{c1}█████████████████████████ {DefaultColor}'
-t8  = f'{c2}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
+t6  = f'{c3}░░░░░░░░░░░░░░░░░░░░░░░░░ {DefaultColor}'
+t7  = f'{c1}░░░░░░░░░░░░░░░░░░░░░░░░░ {DefaultColor}'
+t8  = f'{c2}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ {DefaultColor}'
 t9  = f'{c3}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ {DefaultColor}'
-t10 = f'{c1}░░░░░░░░░░░░░░░░░░░░░░░░░ {DefaultColor}'
-t11 = f'{c2}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ {DefaultColor}'
-t12 = f'{c3}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
+t10 = f'{c1}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
+t11 = f'{c2}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ {DefaultColor}'
+t12 = f'{c3}                          {DefaultColor}'
 
 '''
 Debian Image
@@ -152,10 +152,10 @@ arch7 = f"{c2}/_-''    ''-_\\\{DefaultColor} "
 # Line 12
 blank = ' '
 IMGS = {
-    0: [26, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12],
-    1: [25, tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12],
-    2: [20, deb1, deb2, deb3, deb4, deb5, deb6, deb7, deb8, deb9, deb10, deb11, deb12],
-    3: [16, arch1, arch2, arch3, arch4, arch5, arch6, arch7, AB1, AB1, AB1, AB1, AB1]
+    'test': [26, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12],
+    'generic': [25, tux_l1, tux_l2, tux_l3, tux_l4, tux_l5, tux_l6, tux_l7, tux_l8, tux_l9, tux_l10, tux_l11, tux_l12],
+    'deb': [20, deb1, deb2, deb3, deb4, deb5, deb6, deb7, deb8, deb9, deb10, deb11, deb12],
+    'arch': [16, arch1, arch2, arch3, arch4, arch5, arch6, arch7, AB1, AB1, AB1, AB1, AB1]
     }
 
 '''
@@ -262,7 +262,7 @@ RAM            = f'{TextColor}Memory (RAM): {DefaultColor}{RAMstr}{DefaultColor}
 Uptime         = f'{TextColor}Uptime: {DefaultColor}{DefaultColor}{uptime} Minutes'
 Desktop        = f'{TextColor}Desktop: {DefaultColor}{DefaultColor}{Desktopstr}'
 DispServ       = f"{TextColor}Display Server: {DefaultColor}{DispServStr}"
-CursorTheme    = f"{TextColor}Cursor Theme:{DefaultColor}{CurStr}"
+CursorTheme    = f"{TextColor}Cursor Theme: {DefaultColor}{CurStr}"
 if ThemeStr != '':
     GTKTheme       = f"{TextColor}GTK Theme: {DefaultColor}{ThemeStr}"
 
