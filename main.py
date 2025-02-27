@@ -53,7 +53,7 @@ line_diff = 0
 IconStr = ''
 CurStr = ''
 ThemeStr = ''
-if flgs.startswith('-h'):
+if '-h' in flgs:
     HideNameAndSystem = True
 else:
     HideNameAndSystem = False
