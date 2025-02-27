@@ -10,6 +10,12 @@
 # For ASCII Images, keep them 22 Characters by 12 Characters
 
 import os, psutil
+from sys import argv
+try:
+    script, flgs = argv
+except:
+    flgs = ''
+
 '''
 Variable Setup
 '''
@@ -47,7 +53,10 @@ line_diff = 0
 IconStr = ''
 CurStr = ''
 ThemeStr = ''
-HideNameAndSystem = True   # I'd like to make this a command line option at some point
+if flgs.startswith('-h'):
+    HideNameAndSystem = True
+else:
+    HideNameAndSystem = False
 '''
 Distro
 '''
@@ -146,7 +155,7 @@ arch7 = f"{c2}/_-''    ''-_\\\{DefaultColor} "
 
 
 # Format:
-# Line length -1 (for blank setting)
+# Line length -1 (for whitespace setting)
 # Line 1
 # ...  (the other lines)
 # Line 12
