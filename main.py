@@ -183,20 +183,6 @@ Uptime
 '''
 uptime = str(round((float((open('/proc/uptime', 'r').readline().split(' '))[0]) / 60),0)).replace('.0','')
 
-'''
-Monitor
-'''
-try:
-
-    # Change line_diff depending on how monitors.xml is set up
-    Monitor_Width = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[18-line_diff]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('width', ''))
-    Monitor_Height = ((open(f'{os.getenv("HOME")}/.config/monitors.xml', 'r').readlines()[19-line_diff]).replace('<','').replace('>','').replace('/','').replace('\n', '').replace(' ', '').replace('height', ''))
-
-except: #This was added since monitor resolution code didn't work on Gentoo
-    Monitor_Width = 'UNKNOWN'
-    Monitor_Height= 'UNKNOWN'
-
-Res = f'{Monitor_Width}x{Monitor_Height}'
 
 '''
 RAM & Shell
@@ -276,8 +262,6 @@ if ThemeStr != '':
 
 if IconStr != '':
     IconTheme      = f"{TextColor}Icon Theme: {DefaultColor}{IconStr}"
-
-Resolution     = f"{TextColor}Resolution: {DefaultColor}{Res}"
 GPU            = f"{TextColor}GPU: {DefaultColor}{GPU_Pretty}"
 if WM == "":
     WM_Pretty  = ""
@@ -306,11 +290,12 @@ print(f"{IMGS[img][9]}{Desktop}")
 print(f"{IMGS[img][10]}{DispServ}")
 if WM_Pretty != "":
     print(f"{IMGS[img][11]}{WM_Pretty}")
-    print(f"{IMGS[img][12]}{Resolution}")
-    print(f"{blank}{GPU}")
-else:
-    print(f"{IMGS[img][11]}{Resolution}")
     print(f"{IMGS[img][12]}{GPU}")
+    print(f"{blank}{Arch}")
+
+else:
+    print(f"{IMGS[img][11]}{GPU}")
+    print(f"{IMGS[img][12]}{Arch}")
 if os.environ.get("XDG_SESSION_TYPE") == 'tty':
     pass
 else:
@@ -320,7 +305,6 @@ else:
     if ThemeStr != '':
         print(f"{blank}{GTKTheme}")
 
-print(f"{blank}{Arch}")
 print(f"\n{blank}{ColoredBlocks}")
 print(f"{blank}{ClrBlk_Lighter}")
 
