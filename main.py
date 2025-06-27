@@ -145,13 +145,13 @@ deb12 = f"       {c1}`'##:.{DefaultColor}       "
 the "i use arch btw" image
 '''
 AB1   =  '                '
-arch1 = f'      {c1}/\\\{DefaultColor}       '
-arch2 = f'     {c1}/  \\\{DefaultColor}      '
-arch3 = f'    {c1}/\\\   \\\{DefaultColor}    '
-arch4 = f'   {c1}/      \\\{DefaultColor}    '
-arch5 = f'  {c2}/   ,,   \\\{DefaultColor}   '
-arch6 = f' {c2}/   |  |  -\\\{DefaultColor}  '
-arch7 = f"{c2}/_-''    ''-_\\\{DefaultColor} "
+arch1 = f'      {c1}/\\{DefaultColor}        '
+arch2 = f'     {c1}/  \\{DefaultColor}       '
+arch3 = f'    {c1}/    \\{DefaultColor}      '
+arch4 = f'   {c1}/      \\{DefaultColor}     '
+arch5 = f'  {c2}/   ,,   \\{DefaultColor}    '
+arch6 = f' {c2}/   |  |  -\\{DefaultColor}   '
+arch7 = f"{c2}/_-''    ''-_\\{DefaultColor}  "
 
 
 # Format:
