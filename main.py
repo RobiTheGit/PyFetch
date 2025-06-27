@@ -237,8 +237,7 @@ if Desktopstr == "X-Cinnamon":
         Desktopstr = 'Cinnamon'
 if Desktopstr == "GNOME" and not Desktopstr == "GNOME-Flashback:GNOME:":
     Desktopstr = (os.popen('gnome-shell --version')).read().replace(' Shell ', ' ').replace('\n', '')
-else:
-    DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
+DispServStr = os.environ.get("XDG_SESSION_TYPE").title()
 
 '''
 Themes
